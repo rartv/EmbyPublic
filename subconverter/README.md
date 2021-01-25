@@ -4,4 +4,4 @@
 
 ![sub-web](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/iShot2021-01-25%2020.35.00.png)
 
-或使用 [sub-web](https://sub-web.netlify.app) 生成地址时填写远程配置地址为 [emby_external_config.ini](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/emby_external_config.ini) 或 [emby_external_config.yml](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/emby_external_config.yml) 的地址。
+或使用 [sub-web](https://sub-web.netlify.app) 生成地址时填写`远程配置`为 [emby_external_config.ini](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/emby_external_config.ini) 或 [emby_external_config.yml](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/emby_external_config.yml) 的地址。
