@@ -1,0 +1,9 @@
+custom:
+# Emby 公益服终点站 subconverter 外部配置文件
+  proxy_groups:
+    - {import: snippets/groups.txt}
+    - {name: Emby, type: select, rule: ["[]DIRECT`.*"]}
+
+  rulesets:
+    - {ruleset: "clash-classic:https://raw.githubusercontent.com/rartv/EmbyPublic/test/clash/rule-provider-emby.yaml", group: "Emby"}
+    - {import: snippets/rulesets.txt}
