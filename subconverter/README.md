@@ -9,4 +9,3 @@
 ## OpenClash 上的效果
 
 ![OpenClash](https://raw.githubusercontent.com/rartv/EmbyPublic/test/subconverter/iShot2021-02-20%2022.45.17.png)
-
