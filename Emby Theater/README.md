@@ -9,7 +9,7 @@
 ## 二、安装 mpv
 
 ```shell
-brew install mpv
+brew install -s mpv
 ```
 
 **注意:** 不是 `cask` 方式安装，而是 `formula` 方式！
