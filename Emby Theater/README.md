@@ -12,8 +12,6 @@
 brew install -s mpv
 ```
 
-**注意:** 不是 `cask` 方式安装，而是 `formula` 方式！
-
 ## 三、替换 libass ，字幕就完美了
 
 由于上面安装的 `libmpv` 对于某些中文字幕会乱码，所以下面给出一个解决办法。( 原因: [https://zrstea.com/261/](https://zrstea.com/261/) )
