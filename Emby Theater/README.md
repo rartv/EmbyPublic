@@ -9,7 +9,7 @@
 ## 二、安装 mpv
 
 ```shell
-brew install -s mpv
+brew install --HEAD mpv
 ```
 
 ## 三、替换 libass ，字幕就完美了
