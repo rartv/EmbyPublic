@@ -58,4 +58,4 @@ brew install -s libass.rb
 
 保存即可
 
-*方法来源：[https://neko.re/archives/225.html](https://neko.re/archives/225.html)*
+*解锁方法来源：[https://neko.re/archives/225.html](https://neko.re/archives/225.html)*
