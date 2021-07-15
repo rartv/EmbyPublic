@@ -18,7 +18,7 @@ brew install --HEAD mpv
 
 ### 步骤：
 
-1. 下载这个 [libass.rb](https://github.com/rartv/EmbyPublic/releases/download/0.0.33/libass.rb) 这个文件。比我保存到了系统下载目录 `~/Downloads` 里；
+1. 下载这个 [libass.rb](https://github.com/rartv/EmbyPublic/releases/download/0.0.33/libass.rb) 这个文件。比如我保存到了系统下载目录 `~/Downloads` 里；
 2. 进入下载目录 `cd ~/Downloads` ；
 3. 卸载安装 `libmpv` 时安装的 `libass` ，然后重新编译并安装，命令如下：
 
