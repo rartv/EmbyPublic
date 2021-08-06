@@ -25,7 +25,7 @@ fi
 reject='var status=(response||{}).status;return console.log("getRegistrationInfo response: "+status),403===status?Promise.reject("overlimit"):status&&status<500?Promise.reject():function(err){if(console.log("getRegistrationInfo failed: "+err),regCacheValid)return console.log("getRegistrationInfo returning cached info"),Promise.resolve();throw err}(response)'
 resolve='return appStorage.setItem(cacheKey,JSON.stringify({lastValidDate:Date.now(),deviceId:params.deviceId,cacheExpirationDays:999})),Promise.resolve()'
 
-sudo sed -i.bak "s/$reject/$resolve/" $ConnectionManagerFile
+sudo sed -i "" "s/$reject/$resolve/" $ConnectionManagerFile
 
 echo -e "\033[32mEmby Premiere 解锁成功\033[0m"
 
