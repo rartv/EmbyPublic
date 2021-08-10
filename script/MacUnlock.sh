@@ -3,7 +3,7 @@
 if [[ `uname  -a` =~ "Darwin" ]];then
     echo -e "\033[33m开始检测是否已安装 Emby 客户端...\033[0m"
 else
-    echo -e "\033[31m非 MacOS 系统，不能使用此脚本解锁 Emby Premiere\033[0m"
+    echo -e "\033[31m非 MacOS 系统，不能使用此脚本解锁 Emby 播放权限\033[0m"
     exit 0
 fi
 
@@ -15,10 +15,10 @@ if [ ! -f "$ConnectionManagerFile" ]; then
     exit 0
 fi
 
-echo "已安装 Emby 客户端，准备解锁 Emby Premiere"
+echo "已安装 Emby 客户端，准备解锁 Emby 播放权限"
 
 if [ -f "${ConnectionManagerFile}.bak" ]; then
-    echo -e "\033[32mEmby Premiere 已解锁，无需重复操作\033[0m"
+    echo -e "\033[32mEmby 播放权限 已解锁，无需重复操作\033[0m"
     exit 0
 fi
 
@@ -27,7 +27,7 @@ resolve='return appStorage.setItem(cacheKey,JSON.stringify({lastValidDate:Date.n
 
 sudo sed -i "" "s/$reject/$resolve/" $ConnectionManagerFile
 
-echo -e "\033[32mEmby Premiere 解锁成功\033[0m"
+echo -e "\033[32mEmby 播放权限解锁成功\033[0m"
 
 pid=`ps -ef|grep ${EmbyApp}|grep -v grep|awk '{print $2}'`
 if [ ! -z $pid ]; then
