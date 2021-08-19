@@ -16,6 +16,10 @@
 1. 无法下载影片的外挂字幕
 2. 只能在浏览器中使用，不能在 Emby 客户端中使用
 
+### 效果
+
+![浏览器中下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/D41B9DC0-E715-4C98-B6BB-BBADC456BDA7_162833.jpeg)
+
 ## 📖 使用 Shu 下载视频
 
 Shu 是 iOS 上最强的文件预览、解压、中转软件 ( 没有之一 ) ，我们可以使用它来下载视频。
