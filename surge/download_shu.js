@@ -144,6 +144,7 @@ function generateShuURL(data, X_Emby_Authorization) {
     urls.push({
       'header': {
         'User-Agent': user_agent,
+        'X-Emby-Authorization': X_Emby_Authorization,
       },
       'url': data.subtitles[key].url,
       'name': data.subtitles[key].filename,
