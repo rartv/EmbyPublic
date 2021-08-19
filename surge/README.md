@@ -9,7 +9,7 @@
 ### 模块安装及使用
 
 1. 在 iOS 或 macOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby.sgmodule`
-2. 在 **Safari 浏览器** 中打开打开终点站**网站**，在影片详情页中点击 **更多** -> **下载**
+2. 在 **Safari 浏览器** 中打开打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载**
 
 ### 限制
 
@@ -31,9 +31,9 @@ Shu 是一款付费软件，购买地址: [https://itunes.apple.com/app/id128229
 ### 模块安装及使用
 
 1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_shu.sgmodule`
-2. 在 **Safari 浏览器** 中打开打开终点站**网站**，在影片详情页中点击 **更多** -> **下载**
+2. 在 **Safari 浏览器** 中打开打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载**
 3. 此时会弹出 **是否在 “Shu 文件” 中打开此页？** 的对话框，点击 **打开**
-4. 跳转到 Shu 后，点击 **新建下载任务** 页的**右上角按钮**开始下载
+4. 跳转到 Shu 后，点击 **新建下载任务** 页的 **右上角按钮** 开始下载
 5. 长按下载的视频文件，导入 nPlayer 播放以提高播放体验
 
 ### 限制
@@ -54,7 +54,7 @@ VLC 是一款免费开源的播放软件，下载地址: [https://itunes.apple.c
 ### 模块安装及使用
 
 1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_vlc.sgmodule`
-2. 在 **Safari 浏览器** 中打开打开终点站**网站**，在影片详情页中点击 **更多** -> **下载**
+2. 在 **Safari 浏览器** 中打开打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载**
 3. 此时会弹出 **是否在 “VLC” 中打开此页？** 的对话框，点击 **打开**
 4. 跳转到 VLC 后等一下就开始播放了
 
