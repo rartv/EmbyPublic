@@ -28,8 +28,21 @@ Shu 是一款付费软件，购买地址: [https://itunes.apple.com/app/id128229
 2. 在 **Safari 浏览器** 中打开打开终点站**网站**，在影片详情页中点击 **更多** -> **下载**
 3. 此时会弹出 **是否在 “Shu 文件” 中打开此页？** 的对话框，点击 **打开**
 4. 打开 Shu 后，点击 **新建下载任务** 页的右上角按钮开始下载
+5. 长按下载的视频文件，导入 nPlayer 播放以提高播放体验
 
 ### 限制
 
 1. 只能在 iOS 中使用
 2. 只能在浏览器中使用，不能在 Emby 客户端中使用
+
+## 🎬 使用 VLC 播放器在线播放
+
+### 安装 VLC 播放器
+
+VLC 是一款免费开源的播放软件，下载地址: [https://itunes.apple.com/app/id650377962](https://itunes.apple.com/app/id650377962)
+
+### 模块安装及使用
+
+1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_vlc.sgmodule`
+2. 在 **Safari 浏览器** 中打开打开终点站**网站**，在影片详情页中点击 **更多** -> **下载**
+3. 此时会弹出 **是否在 “VLC” 中打开此页？** 的对话框，点击 **打开**
