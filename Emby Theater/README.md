@@ -49,7 +49,7 @@ brew install -s libass.rb
 ```javascript
     function getAppBaseUrl() {
 
-        var url = 'https://theater.embypremiere.workers.dev';
+        var url = 'https://happyemby.911997.xyz';
 
         //url = 'http://localhost:8088';
         return url;
