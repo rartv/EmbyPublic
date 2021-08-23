@@ -1,3 +1,17 @@
+/**
+*
+* @Title: rename.js
+*
+* @Description: 浏览器下载文件重命名
+*
+* @author: Arcade
+*
+* @version V1.0
+*
+* @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
+*
+*/
+
 if ($request.url.indexOf('/Videos/') != -1) {
   if($response.status==200){
     let query = getQueryVariable($request.url);
