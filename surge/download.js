@@ -2,7 +2,7 @@
 *
 * @Title: download.js
 *
-* @Description: 显示下载按钮
+* @Description: 浏览器下载
 *
 * @author: Arcade
 *
