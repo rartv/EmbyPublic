@@ -2,7 +2,7 @@
 *
 * @Title: download_shu.js
 *
-* @Description: Shu 下载
+* @Description: iOS 的浏览器中使用 Shu 下载
 *
 * @author: Arcade
 *
