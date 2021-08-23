@@ -1,3 +1,17 @@
+/**
+*
+* @Title: download_shu.js
+*
+* @Description: Shu 下载
+*
+* @author: Arcade
+*
+* @version V1.0
+*
+* @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
+*
+*/
+
 var ShuAppDownload = true;  // 是否使用 iOS 上的 Shu APP 下载，使用的话支持同时下载外挂字幕和文件重命名，不使用的话只能浏览器中下载视频。 是:true 否:false
 
 if ($request.url.indexOf('/emby/Users/') != -1) {
