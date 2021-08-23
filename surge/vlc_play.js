@@ -1,3 +1,17 @@
+/**
+*
+* @Title: vlc_play.js
+*
+* @Description: iOS 浏览器中调用 VLC 播放器播放
+*
+* @author: Arcade
+*
+* @version V1.0
+*
+* @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
+*
+*/
+
 if ($request.url.indexOf('/emby/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
