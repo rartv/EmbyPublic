@@ -2,7 +2,7 @@
 *
 * @Title: download.js
 *
-* @Description: 浏览器下载
+* @Description: iOS / macOS 的浏览器中下载
 *
 * @author: Arcade
 *
