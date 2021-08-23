@@ -3,7 +3,8 @@
 
 [Script]
 播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
-获取设备信息 = type=http-response,pattern=\/emby\/Users\/\w{32},requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download.js,debug=false
+获取设备信息 = type=http-response,pattern=\/emby\/Users\/\w{32}\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download.js,debug=false
+获取设备信息2 = type=http-response,pattern=\/emby\/Users\/\w{32}\/Items\/\d+,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download.js,debug=false
 下载解锁 = type=http-response,pattern=\/emby\/Items\/\d+\/Download,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download.js,debug=false
 下载文件重命名 = type=http-response,pattern=\/Videos\/\d+\/stream.+&filename,requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/rename.js,debug=false
 
