@@ -1,3 +1,17 @@
+/**
+*
+* @Title: download.js
+*
+* @Description: 显示下载按钮
+*
+* @author: Arcade
+*
+* @version V1.0
+*
+* @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
+*
+*/
+
 if ($request.url.indexOf('/emby/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
