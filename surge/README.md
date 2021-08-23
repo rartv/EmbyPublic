@@ -5,7 +5,7 @@
 ⚠️ **注意：**
 
 1. 下面提供的 3 个模块可以同时安装，但不能同时激活使用！
-2. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.md)，可以把那个模块禁用或删除。
+2. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](https://embywiki.911997.xyz/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.html)，可以把那个模块禁用或删除。
 
 ## 🌐 浏览器中下载视频
 
