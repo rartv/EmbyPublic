@@ -1,12 +1,10 @@
 #!name=Emby ( 使用 VLC for iOS 播放 )
-#!desc=Emby iOS 【客户端】播放权限解锁；iOS【浏览器】上激活下载按钮并调用 VLC 播放影片 (支持外挂字幕，但由于 VLC 限制，只支持加载一个外挂字幕)。
+#!desc=Emby iOS 【客户端】播放权限解锁；iOS【浏览器】中激活下载按钮并调用 VLC 播放影片 (支持外挂字幕，但由于 VLC 限制，只支持加载一个外挂字幕)。
 #!system=ios
 
 [Script]
 播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
-获取设备信息 = type=http-response,pattern=\/emby\/Users\/\w{32}\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/vlc_play.js,debug=false
-获取设备信息2 = type=http-response,pattern=\/emby\/Users\/\w{32}\/Items\/\d+\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/vlc_play.js,debug=false
-下载解锁 = type=http-response,pattern=\/emby\/Items\/\d+\/Download,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/vlc_play.js,debug=false
+下载解锁 = type=http-response,pattern=(\/emby\/Users\/\w{32}\?)|(\/emby\/Users\/\w{32}\/Items\/\d+\?)|(\/emby\/Items\/\d+\/Download),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/vlc_play.js,debug=false
 
 [MITM]
 hostname = %APPEND% mb3admin.com, *.emby.wtf:0
