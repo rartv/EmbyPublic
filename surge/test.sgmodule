@@ -1,4 +1,4 @@
-#!name=Emby ( 使用浏览器下载 )
+#!name=Emby ( 多合一模块 )
 #!desc=Emby iOS/macOS 【客户端】播放权限解锁；【浏览器】上下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
 
 [Script]
