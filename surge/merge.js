@@ -1,8 +1,8 @@
 /**
 *
-* @Title: download.js
+* @Title: merge.js
 *
-* @Description: iOS / macOS 的浏览器中下载
+* @Description: iOS / macOS 的浏览器中下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
 *
 * @author: Arcade
 *
