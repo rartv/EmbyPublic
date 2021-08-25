@@ -8,6 +8,13 @@
 2. 模之间切换之后，可能会由于浏览器缓存导致功能异常，请多刷新下网页或清除浏览器缓存 ( iOS 可以在 **手机设置** -> **Safari浏览器** -> **高级** -> **网站数据** -> 搜索 **emby** ，最后 **左划删除** 来清除缓存 )；
 3. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](https://embywiki.911997.xyz/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.html)，可以把那个模块禁用或删除。
 
+⛔️ **封号警告：**
+
+1. 请勿将下载链接复制到**多线程下载**工具中下载！
+2. 请勿**多任务大批量**的同时下载！
+3. 终点站有后台监控，超过某个阈值会自动封号，[封号记录查询频道](https://t.me/joinchat/U7M2tqH3NKErZmP_)
+
+
 ## 🌐 浏览器中下载视频
 
 ### 模块安装及使用
@@ -109,3 +116,22 @@ Infuse 下载地址: [https://itunes.apple.com/app/id1136220934](https://itunes.
 1. 只能在 iOS 中使用
 2. 只能在浏览器中使用，不能在 Emby 客户端中使用
 3. 不支持外挂字幕
+
+## 🙏 多合一模块
+
+如果上面提到的软件你都经常使用，但切换模块后又不会立即生效 ( 因为 Emby 网站资源缓存时间较长，需要手动清理浏览器缓存 )，这时就需要一个把上面各模块合而为一的模块了。
+
+### 模块安装及使用
+
+1. 在 iOS 或 macOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_merge.sgmodule`
+2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** ( 如果是剧集类型，需在要播放的那一集的详情页点更多按钮 )
+3. 此时会看到各个不同的操作，根据需要选择
+
+### 限制
+
+1. 调用第三方软件的功能只能在 iOS 中使用
+2. 只能在浏览器中使用，不能在 Emby 客户端中使用
+
+### 效果
+
+![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/26/8ADFA930-2DF4-4A6C-B3E2-E5915862A028_051046.jpeg)
