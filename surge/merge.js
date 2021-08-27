@@ -16,21 +16,17 @@ if ($request.url.indexOf('/emby/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
     $response.body = $response.body.replace(/"EnableContentDownloading":false,/g, '"EnableContentDownloading":true,');
-
     let body = JSON.parse($response.body);
-
     let user_id_result = $request.url.match(/\/emby\/Users\/(\w{32})/);
     if (typeof(user_id_result) != "undefined") {
       $persistentStore.write(user_id_result[1], 'user_id');
     }
-
     let query = getQueryVariable($request.url);
     $persistentStore.write(query['X-Emby-Client'], 'X-Emby-Client');
     $persistentStore.write(query['X-Emby-Device-Name'], 'X-Emby-Device-Name');
     $persistentStore.write(query['X-Emby-Device-Id'], 'X-Emby-Device-Id');
     $persistentStore.write(query['X-Emby-Client-Version'], 'X-Emby-Client-Version');
     $persistentStore.write(query['X-Emby-Token'], 'X-Emby-Token');
-
     $done({status: 200, headers: $response.headers, body: JSON.stringify(body) });
   }else{
     $done({});
@@ -46,14 +42,12 @@ if ($request.url.indexOf('/Download') != -1){
     let X_Emby_Client_Version = $persistentStore.read('X-Emby-Client-Version');
     let X_Emby_Token = $persistentStore.read('X-Emby-Token');
     let X_Emby_Authorization = "MediaBrowser Device=\""+X_Emby_Device_Name+"\", DeviceId=\""+X_Emby_Device_Id+"\", Version=\""+X_Emby_Client_Version+"\", Client=\""+X_Emby_Client+"\", Token=\""+X_Emby_Token+"\"";
-
     let host = getHost($request.url);
     let query = getQueryVariable($request.url);
     let video_id = $request.url.match(/emby\/Items\/(\S*)\/Download/)[1];
     let api_key = query.api_key;
     let media_source_id = query.mediaSourceId;
     let type = query.type;
-
     let video_info_url = host + '/emby/Users/' + user_id + '/Items/' + video_id;
     $httpClient.get({
       url: video_info_url,
@@ -67,16 +61,13 @@ if ($request.url.indexOf('/Download') != -1){
         $done();
       }else{
         let video_data = JSON.parse(data);
-
         for (let key in video_data.MediaSources) {
           let media_source = video_data.MediaSources[key];
           if (media_source.Id == media_source_id) {
             let download_info = downloadInfo(host, video_id, media_source, api_key);
-
             let command = generateCURL(download_info);
             console.log("《" + video_data.SortName + "》 CURL 批量下载命令: " + command + "\n");
             // $notification.post("《" + video_data.SortName + "》 CURL 批量下载命令已生成", "详情请查看日志", command);
-            
             switch(type)
             {
                 case "nplayer_play":
@@ -112,11 +103,9 @@ if ($request.url.indexOf('/Download') != -1){
             break;
           }
         }
-          
         $done({});
       }
     });
-
   }
 }
 
@@ -135,7 +124,6 @@ function downloadInfo (host, video_id, media_source, api_key) {
   let video = new Object();
   video.filename = getFileName(media_source.Path);
   video.url = host + '/Videos/'+ video_id +'/stream/' + encodeURI(video.filename) + '?mediaSourceId=' + media_source.Id + '&static=true&filename=' + encodeURI(video.filename) + '&api_key=' + api_key;
-
   let subtitles = new Array();
   let array_index = 0;
   for (let key in media_source.MediaStreams) {
@@ -148,7 +136,6 @@ function downloadInfo (host, video_id, media_source, api_key) {
       array_index++;
     }
   }
-
   return {
     "video": video,
     "subtitles": subtitles,
@@ -163,7 +150,6 @@ function generateCURL(data) {
   for (let key in data.subtitles) {
     command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
   }
-
   return command;
 }
 
@@ -192,8 +178,6 @@ function generateShuURL(data) {
       'suspend': false,
     });
   }
-  console.log(urls);
-  console.log(JSON.stringify(urls));
   return 'shu://gui.download.http?urls=' + encodeURIComponent(JSON.stringify(urls));
 }
 
