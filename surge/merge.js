@@ -4,7 +4,7 @@
 *
 * @Description: iOS / macOS 的浏览器中下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *
@@ -67,7 +67,6 @@ if ($request.url.indexOf('/Download') != -1){
             let download_info = downloadInfo(host, video_id, media_source, api_key);
             let command = generateCURL(download_info);
             console.log("《" + video_data.SortName + "》 CURL 批量下载命令: " + command + "\n");
-            // $notification.post("《" + video_data.SortName + "》 CURL 批量下载命令已生成", "详情请查看日志", command);
             switch(type)
             {
                 case "nplayer_play":
@@ -99,7 +98,6 @@ if ($request.url.indexOf('/Download') != -1){
                       }
                     })
             }
-
             break;
           }
         }
@@ -183,10 +181,10 @@ function generateShuURL(data) {
 
 function generateVlcURLScheme(data) {
   let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url);
-  // 添加字幕 ( 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕 )
+  // 添加字幕
   for (let key in data.subtitles) {
     vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url);
-    break;
+    break;  // 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕
   }
   return vlc_x_callback;
 }
