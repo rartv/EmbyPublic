@@ -4,7 +4,7 @@
 *
 * @Description: 客户端播放权限解锁
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *

@@ -4,7 +4,7 @@
 *
 * @Description: iOS 的浏览器中使用 Shu 下载
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *

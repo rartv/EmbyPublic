@@ -4,7 +4,7 @@
 *
 * @Description: iOS 浏览器中调用 VLC 播放器播放
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *
