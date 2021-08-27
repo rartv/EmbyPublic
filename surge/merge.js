@@ -73,7 +73,7 @@ if ($request.url.indexOf('/Download') != -1){
           if (media_source.Id == media_source_id) {
             let download_info = downloadInfo(host, video_id, media_source);
 
-            let command = generateCURL(download_info, X_Emby_Authorization);
+            let command = generateCURL(download_info, api_key);
             console.log("《" + video_data.SortName + "》 CURL 批量下载命令: " + command + "\n");
             // $notification.post("《" + video_data.SortName + "》 CURL 批量下载命令已生成", "详情请查看日志", command);
             
@@ -85,7 +85,7 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 301, headers: {Location:nplayer_url_scheme} })
                     break;
                 case "shu_download":
-                    let shu_download_url = generateShuURL(download_info, X_Emby_Authorization);
+                    let shu_download_url = generateShuURL(download_info, api_key);
                     console.log("《" + video_data.SortName + "》 Shu 批量下载地址: " + shu_download_url + "\n");
                     $done({status: 301, headers: {Location:shu_download_url} })
                     break;
@@ -156,13 +156,13 @@ function downloadInfo (host, video_id, media_source) {
   }
 }
 
-function generateCURL(data, X_Emby_Authorization) {
+function generateCURL(data, api_key) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
-  let command = "curl -A '" + user_agent + "' -H 'X-Emby-Authorization: " + X_Emby_Authorization + "' -H 'Accept: */*' ";
-  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '" ';
+  let command = "curl -A '" + user_agent + "' -H 'Accept: */*' ";
+  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '&api_key='+api_key+'" ';
 
   for (let key in data.subtitles) {
-    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
+    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '&api_key='+api_key+'" ';
   }
 
   return command;
@@ -172,15 +172,14 @@ function generateNplayerURLScheme(data, api_key) {
   return "nplayer-" + data.video.url + "&api_key=" + api_key;
 }
 
-function generateShuURL(data, X_Emby_Authorization) {
+function generateShuURL(data, api_key) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
   let urls = new Array();
   urls[0] = {
     'header': {
       'User-Agent': user_agent,
-      'X-Emby-Authorization': X_Emby_Authorization,
     },
-    'url': data.video.url,
+    'url': data.video.url + "&api_key=" + api_key,
     'name': data.video.filename,
     'suspend': false,
   };
@@ -190,7 +189,7 @@ function generateShuURL(data, X_Emby_Authorization) {
         'User-Agent': user_agent,
         'X-Emby-Authorization': X_Emby_Authorization,
       },
-      'url': data.subtitles[key].url,
+      'url': data.subtitles[key].url + "&api_key=" + api_key,
       'name': data.subtitles[key].filename,
       'suspend': false,
     });
