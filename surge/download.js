@@ -4,7 +4,7 @@
 *
 * @Description: iOS / macOS 的浏览器中下载
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *
@@ -15,7 +15,6 @@
 if ($request.url.indexOf('/emby/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
-    $response.body = $response.body.replace(/"EnableContentDownloading":false,/g, '"EnableContentDownloading":true,');
 
     let body = JSON.parse($response.body);
 
