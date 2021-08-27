@@ -134,8 +134,8 @@ if ($request.url.indexOf('/web/modules/itemcontextmenu.js') != -1) {
 
 function downloadInfo (host, video_id, media_source) {
   let video = new Object();
-  video.url = host + '/Videos/'+ video_id +'/stream?mediaSourceId=' + media_source.Id + '&static=true';
   video.filename = getFileName(media_source.Path);
+  video.url = host + '/Videos/'+ video_id +'/stream/' + video.filename + '?mediaSourceId=' + media_source.Id + '&static=true';
 
   let subtitles = new Array();
   let array_index = 0;
