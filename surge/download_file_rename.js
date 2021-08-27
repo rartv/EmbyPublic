@@ -4,7 +4,7 @@
 *
 * @Description: 浏览器下载文件重命名
 *
-* @author: Arcade
+* @author: https://t.me/AppleArcade
 *
 * @version V1.0
 *
