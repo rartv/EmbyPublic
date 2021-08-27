@@ -71,41 +71,40 @@ if ($request.url.indexOf('/Download') != -1){
         for (let key in video_data.MediaSources) {
           let media_source = video_data.MediaSources[key];
           if (media_source.Id == media_source_id) {
-            let download_info = downloadInfo(host, video_id, media_source);
+            let download_info = downloadInfo(host, video_id, media_source, api_key);
 
-            let command = generateCURL(download_info, api_key);
+            let command = generateCURL(download_info);
             console.log("《" + video_data.SortName + "》 CURL 批量下载命令: " + command + "\n");
             // $notification.post("《" + video_data.SortName + "》 CURL 批量下载命令已生成", "详情请查看日志", command);
             
             switch(type)
             {
                 case "nplayer_play":
-                    let nplayer_url_scheme = generateNplayerURLScheme(download_info, api_key);
+                    let nplayer_url_scheme = generateNplayerURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 nPlayer 播放地址: " + nplayer_url_scheme + "\n");
                     $done({status: 301, headers: {Location:nplayer_url_scheme} })
                     break;
                 case "shu_download":
-                    let shu_download_url = generateShuURL(download_info, api_key);
+                    let shu_download_url = generateShuURL(download_info);
                     console.log("《" + video_data.SortName + "》 Shu 批量下载地址: " + shu_download_url + "\n");
                     $done({status: 301, headers: {Location:shu_download_url} })
                     break;
                 case "vlc_play":
-                    let vlc_url_scheme = generateVlcURLScheme(download_info, api_key);
+                    let vlc_url_scheme = generateVlcURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 VLC 播放地址: " + vlc_url_scheme + "\n");
                     $done({status: 301, headers: {Location:vlc_url_scheme} })
                     break;
                 case "infuse_play":
-                    let infuse_url_scheme = generateInfuseURLScheme(download_info, api_key);
+                    let infuse_url_scheme = generateInfuseURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 Infuse 播放地址: " + infuse_url_scheme + "\n");
                     $done({status: 301, headers: {Location:infuse_url_scheme} })
                     break;
                 default:
-                    let video_download_url = download_info.video.url + "&api_key=" + api_key;
-                    console.log("《" + video_data.SortName + "》 视频下载地址: " + video_download_url + "\n");
+                    console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.url + "\n");
                     $done({
                       status: 301,
                       headers: {
-                        'Location': video_download_url
+                        'Location': download_info.video.url
                       }
                     })
             }
@@ -132,10 +131,10 @@ if ($request.url.indexOf('/web/modules/itemcontextmenu.js') != -1) {
     $done({status: $response.status, headers: $response.headers, body: body });
 }
 
-function downloadInfo (host, video_id, media_source) {
+function downloadInfo (host, video_id, media_source, api_key) {
   let video = new Object();
   video.filename = getFileName(media_source.Path);
-  video.url = host + '/Videos/'+ video_id +'/stream/' + encodeURI(video.filename) + '?mediaSourceId=' + media_source.Id + '&static=true&filename=' + encodeURI(video.filename);
+  video.url = host + '/Videos/'+ video_id +'/stream/' + encodeURI(video.filename) + '?mediaSourceId=' + media_source.Id + '&static=true&filename=' + encodeURI(video.filename) + '&api_key=' + api_key;
 
   let subtitles = new Array();
   let array_index = 0;
@@ -143,7 +142,7 @@ function downloadInfo (host, video_id, media_source) {
     let media_streams = media_source.MediaStreams[key];
     if (media_streams.Type == 'Subtitle' && media_streams.IsExternal == 1 && media_streams.IsTextSubtitleStream == 1 ) {
       let subtitle = new Object();
-      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/0/Stream.' + media_streams.Codec;
+      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/0/Stream.' + media_streams.Codec + '?api_key=' + api_key;
       subtitle.filename = getFileName(media_streams.Path);
       subtitles[array_index] = subtitle;
       array_index++;
@@ -156,30 +155,30 @@ function downloadInfo (host, video_id, media_source) {
   }
 }
 
-function generateCURL(data, api_key) {
+function generateCURL(data) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
   let command = "curl -A '" + user_agent + "' -H 'Accept: */*' ";
-  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '&api_key='+api_key+'" ';
+  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '" ';
 
   for (let key in data.subtitles) {
-    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '&api_key='+api_key+'" ';
+    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
   }
 
   return command;
 }
 
-function generateNplayerURLScheme(data, api_key) {
-  return "nplayer-" + data.video.url + "&api_key=" + api_key;
+function generateNplayerURLScheme(data) {
+  return "nplayer-" + data.video.url;
 }
 
-function generateShuURL(data, api_key) {
+function generateShuURL(data) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
   let urls = new Array();
   urls[0] = {
     'header': {
       'User-Agent': user_agent,
     },
-    'url': data.video.url + "&api_key=" + api_key,
+    'url': data.video.url,
     'name': data.video.filename,
     'suspend': false,
   };
@@ -187,28 +186,29 @@ function generateShuURL(data, api_key) {
     urls.push({
       'header': {
         'User-Agent': user_agent,
-        'X-Emby-Authorization': X_Emby_Authorization,
       },
-      'url': data.subtitles[key].url + "&api_key=" + api_key,
+      'url': data.subtitles[key].url,
       'name': data.subtitles[key].filename,
       'suspend': false,
     });
   }
+  console.log(urls);
+  console.log(JSON.stringify(urls));
   return 'shu://gui.download.http?urls=' + encodeURIComponent(JSON.stringify(urls));
 }
 
-function generateVlcURLScheme(data, api_key) {
-  let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url + "&api_key=" + api_key);
+function generateVlcURLScheme(data) {
+  let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url);
   // 添加字幕 ( 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕 )
   for (let key in data.subtitles) {
-    vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url + "?api_key=" + api_key);
+    vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url);
     break;
   }
   return vlc_x_callback;
 }
 
-function generateInfuseURLScheme(data, api_key) {
-  return "infuse://x-callback-url/play?url=" + encodeURIComponent(data.video.url + "&api_key=" + api_key);
+function generateInfuseURLScheme(data) {
+  return "infuse://x-callback-url/play?url=" + encodeURIComponent(data.video.url);
 }
 
 function getFileName(path) {
