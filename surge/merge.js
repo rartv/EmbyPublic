@@ -159,10 +159,10 @@ function downloadInfo (host, video_id, media_source) {
 function generateCURL(data, X_Emby_Authorization) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
   let command = "curl -A '" + user_agent + "' -H 'X-Emby-Authorization: " + X_Emby_Authorization + "' -H 'Accept: */*' ";
-  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '"' + '"' + data.video.url.replace(/"/g, '\"') + '" ';
+  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '" ';
 
   for (let key in data.subtitles) {
-    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '"' + '"' + data.subtitles[key].url + '" ';
+    command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
   }
 
   return command;
