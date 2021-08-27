@@ -105,7 +105,7 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({
                       status: 301,
                       headers: {
-                        'Location': video_download_url + '&filename=' + download_info.video.filename
+                        'Location': video_download_url
                       }
                     })
             }
@@ -135,7 +135,7 @@ if ($request.url.indexOf('/web/modules/itemcontextmenu.js') != -1) {
 function downloadInfo (host, video_id, media_source) {
   let video = new Object();
   video.filename = getFileName(media_source.Path);
-  video.url = host + '/Videos/'+ video_id +'/stream/' + video.filename + '?mediaSourceId=' + media_source.Id + '&static=true';
+  video.url = host + '/Videos/'+ video_id +'/stream/' + video.filename + '?mediaSourceId=' + media_source.Id + '&static=true&filename=' + video.filename;
 
   let subtitles = new Array();
   let array_index = 0;
@@ -199,7 +199,7 @@ function generateShuURL(data, X_Emby_Authorization) {
 }
 
 function generateVlcURLScheme(data, api_key) {
-  let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url + "&api_key=" + api_key) + "&filename=" + data.video.filename;
+  let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url + "&api_key=" + api_key);
   // 添加字幕 ( 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕 )
   for (let key in data.subtitles) {
     vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url + "?api_key=" + api_key);
