@@ -1,6 +1,6 @@
 /**
 *
-* @Title: rename.js
+* @Title: download_file_rename.js
 *
 * @Description: 浏览器下载文件重命名
 *
