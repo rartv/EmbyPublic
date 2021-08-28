@@ -15,7 +15,6 @@
 if ($request.url.indexOf('/emby/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
-    $response.body = $response.body.replace(/"EnableContentDownloading":false,/g, '"EnableContentDownloading":true,');
     let body = JSON.parse($response.body);
     let user_id_result = $request.url.match(/\/emby\/Users\/(\w{32})/);
     if (typeof(user_id_result) != "undefined") {
@@ -52,6 +51,7 @@ if ($request.url.indexOf('/Download') != -1){
     $httpClient.get({
       url: video_info_url,
       headers: {
+          "User-Agent": "Download",
           "X-Emby-Authorization": X_Emby_Authorization,
       },
     }, function(error, response, data){
@@ -137,7 +137,7 @@ function downloadInfo (host, video_id, media_source, api_key) {
 }
 
 function generateCURL(data) {
-  let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
+  let user_agent = "Download";
   let command = "curl -A '" + user_agent + "' -H 'Accept: */*' ";
   command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.original_url.replace(/"/g, '\"') + '" ';
 
@@ -152,7 +152,7 @@ function generateNplayerURLScheme(data) {
 }
 
 function generateShuURL(data) {
-  let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
+  let user_agent = "Download";
   let urls = new Array();
   urls[0] = {
     'header': {
