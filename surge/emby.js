@@ -72,32 +72,27 @@ if ($request.url.indexOf('/Download') != -1){
                 case "nplayer_play":
                     let nplayer_url_scheme = generateNplayerURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 nPlayer 播放地址: " + nplayer_url_scheme + "\n");
-                    $done({status: 301, headers: {Location:nplayer_url_scheme} })
+                    $done({status: 301, headers: {Location:nplayer_url_scheme} });
                     break;
                 case "shu_download":
                     let shu_download_url = generateShuURL(download_info);
                     console.log("《" + video_data.SortName + "》 Shu 批量下载地址: " + shu_download_url + "\n");
-                    $done({status: 301, headers: {Location:shu_download_url} })
+                    $done({status: 301, headers: {Location:shu_download_url} });
                     break;
                 case "vlc_play":
                     let vlc_url_scheme = generateVlcURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 VLC 播放地址: " + vlc_url_scheme + "\n");
-                    $done({status: 301, headers: {Location:vlc_url_scheme} })
+                    $done({status: 301, headers: {Location:vlc_url_scheme} });
                     break;
                 case "infuse_play":
                     let infuse_url_scheme = generateInfuseURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 Infuse 播放地址: " + infuse_url_scheme + "\n");
-                    $done({status: 301, headers: {Location:infuse_url_scheme} })
+                    $done({status: 301, headers: {Location:infuse_url_scheme} });
                     break;
                 default:
                     download_info.video.url = download_info.video.url.replace(/\/stream\/.+\?mediaSourceId/, '/stream\?mediaSourceId');
                     console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.url + "\n");
-                    $done({
-                      status: 301,
-                      headers: {
-                        'Location': download_info.video.url
-                      }
-                    })
+                    $done({status: 301, headers: {'Location': download_info.video.url} });
             }
             break;
           }
