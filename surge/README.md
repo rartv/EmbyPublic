@@ -53,6 +53,10 @@
 1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器；
 2. 不支持外挂字幕。
 
+#### 📖 使用 Shu 下载视频和字幕
+
+1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器。
+
 ### 效果
 
 ![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/26/8ADFA930-2DF4-4A6C-B3E2-E5915862A028_051046.jpeg)
