@@ -90,6 +90,7 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 301, headers: {Location:infuse_url_scheme} })
                     break;
                 default:
+                    download_info.video.url = download_info.video.url.replace(/\/stream\/.+\?mediaSourceId/, '/stream\?mediaSourceId');
                     console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.url + "\n");
                     $done({
                       status: 301,
