@@ -13,7 +13,7 @@
 */
 
 if ($request.url.indexOf('/Videos/') != -1 && $request.method == 'GET') {
-    $request.url = $request.url.replace(/\/stream\/.+\?/, '/stream\?');
+    $request.url = $request.url.replace(/\/stream\/.+\?mediaSourceId/, '/stream\?mediaSourceId');
     $done({
         url: $request.url,
         headers: $request.headers
