@@ -69,15 +69,15 @@ if ($request.url.indexOf('/Download') != -1){
             console.log("《" + video_data.SortName + "》 CURL 批量下载命令:\n" + command + "\n");
             switch(type)
             {
-                case "nplayer_play":
-                    let nplayer_url_scheme = generateNplayerURLScheme(download_info);
-                    console.log("《" + video_data.SortName + "》 nPlayer 播放地址:\n" + nplayer_url_scheme + "\n");
-                    $done({status: 301, headers: {Location:nplayer_url_scheme} });
-                    break;
                 case "shu_download":
                     let shu_download_url = generateShuURL(download_info);
                     console.log("《" + video_data.SortName + "》 Shu 批量下载地址:\n" + shu_download_url + "\n");
                     $done({status: 301, headers: {Location:shu_download_url} });
+                    break;
+                case "nplayer_play":
+                    let nplayer_url_scheme = generateNplayerURLScheme(download_info);
+                    console.log("《" + video_data.SortName + "》 nPlayer 播放地址:\n" + nplayer_url_scheme + "\n");
+                    $done({status: 301, headers: {Location:nplayer_url_scheme} });
                     break;
                 case "vlc_play":
                     let vlc_url_scheme = generateVlcURLScheme(download_info);
@@ -140,7 +140,6 @@ function generateCURL(data) {
   let user_agent = "Download";
   let command = "curl -A '" + user_agent + "' -H 'Accept: */*' ";
   command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.original_url.replace(/"/g, '\"') + '" ';
-
   for (let key in data.subtitles) {
     command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
   }
