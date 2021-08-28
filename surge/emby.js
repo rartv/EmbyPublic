@@ -66,31 +66,31 @@ if ($request.url.indexOf('/Download') != -1){
           if (media_source.Id == media_source_id) {
             let download_info = downloadInfo(host, video_id, media_source, api_key);
             let command = generateCURL(download_info);
-            console.log("《" + video_data.SortName + "》 CURL 批量下载命令: " + command + "\n");
+            console.log("《" + video_data.SortName + "》 CURL 批量下载命令:\n" + command + "\n");
             switch(type)
             {
                 case "nplayer_play":
                     let nplayer_url_scheme = generateNplayerURLScheme(download_info);
-                    console.log("《" + video_data.SortName + "》 nPlayer 播放地址: " + nplayer_url_scheme + "\n");
+                    console.log("《" + video_data.SortName + "》 nPlayer 播放地址:\n" + nplayer_url_scheme + "\n");
                     $done({status: 301, headers: {Location:nplayer_url_scheme} });
                     break;
                 case "shu_download":
                     let shu_download_url = generateShuURL(download_info);
-                    console.log("《" + video_data.SortName + "》 Shu 批量下载地址: " + shu_download_url + "\n");
+                    console.log("《" + video_data.SortName + "》 Shu 批量下载地址:\n" + shu_download_url + "\n");
                     $done({status: 301, headers: {Location:shu_download_url} });
                     break;
                 case "vlc_play":
                     let vlc_url_scheme = generateVlcURLScheme(download_info);
-                    console.log("《" + video_data.SortName + "》 VLC 播放地址: " + vlc_url_scheme + "\n");
+                    console.log("《" + video_data.SortName + "》 VLC 播放地址:\n" + vlc_url_scheme + "\n");
                     $done({status: 301, headers: {Location:vlc_url_scheme} });
                     break;
                 case "infuse_play":
                     let infuse_url_scheme = generateInfuseURLScheme(download_info);
-                    console.log("《" + video_data.SortName + "》 Infuse 播放地址: " + infuse_url_scheme + "\n");
+                    console.log("《" + video_data.SortName + "》 Infuse 播放地址:\n" + infuse_url_scheme + "\n");
                     $done({status: 301, headers: {Location:infuse_url_scheme} });
                     break;
                 default:
-                    console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.original_url + "\n");
+                    console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
                     $done({status: 301, headers: {'Location': download_info.video.original_url} });
             }
             break;
@@ -177,8 +177,7 @@ function generateShuURL(data) {
 
 function generateVlcURLScheme(data) {
   let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url);
-  // 添加字幕
-  for (let key in data.subtitles) {
+  for (let key in data.subtitles) { // 添加字幕
     vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url);
     break;  // 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕
   }
