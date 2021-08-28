@@ -19,9 +19,10 @@
 
 ### 外部软件下载地址
 
-1. [VLC](https://itunes.apple.com/app/id650377962)
-2. [nPlayer](https://itunes.apple.com/app/id539397400)
-3. [Infuse](https://itunes.apple.com/app/id1136220934)
+1. [VLC for Mobile](https://itunes.apple.com/app/id650377962)
+2. [nPlayer Plus](https://itunes.apple.com/app/id539397400)
+3. [Infuse 7](https://itunes.apple.com/app/id1136220934)
+4. [Magic File Viewer - Shu](https://itunes.apple.com/app/id1282297037)
 
 ### 模块安装及使用
 
@@ -63,3 +64,5 @@
 ![nPlayer 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/4CC03724-FC3D-4C27-9BC4-F33DCC9AFE53_075200.jpeg)
 
 ![Infuse 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/5CC95C99-62BB-4C67-BCD9-6413121AD4B2_075140.jpeg)
+
+![使用 Shu 下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/49688D2F-2147-4D4D-A89D-2D299BCF92DB_162230.jpeg)
