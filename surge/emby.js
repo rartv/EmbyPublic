@@ -90,9 +90,8 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 301, headers: {Location:infuse_url_scheme} });
                     break;
                 default:
-                    download_info.video.url = download_info.video.url.replace(/\/stream\/.+\?mediaSourceId/, '/stream\?mediaSourceId');
-                    console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.url + "\n");
-                    $done({status: 301, headers: {'Location': download_info.video.url} });
+                    console.log("《" + video_data.SortName + "》 视频下载地址: " + download_info.video.original_url + "\n");
+                    $done({status: 301, headers: {'Location': download_info.video.original_url} });
             }
             break;
           }
@@ -117,7 +116,8 @@ if ($request.url.indexOf('/web/modules/itemcontextmenu.js') != -1) {
 function downloadInfo (host, video_id, media_source, api_key) {
   let video = new Object();
   video.filename = getFileName(media_source.Path);
-  video.url = host + '/Videos/'+ video_id +'/stream/' + encodeURI(video.filename) + '?mediaSourceId=' + media_source.Id + '&static=true&filename=' + encodeURI(video.filename) + '&api_key=' + api_key;
+  video.url = host + '/Videos/'+ video_id +'/stream/' + encodeURI(video.filename) + '?mediaSourceId=' + media_source.Id + '&static=true&api_key=' + api_key + '&filename=' + encodeURI(video.filename);
+  video.original_url = host + '/Videos/'+ video_id +'/stream?mediaSourceId=' + media_source.Id + '&static=true&api_key=' + api_key + '&filename=' + encodeURI(video.filename);
   let subtitles = new Array();
   let array_index = 0;
   for (let key in media_source.MediaStreams) {
@@ -139,7 +139,7 @@ function downloadInfo (host, video_id, media_source, api_key) {
 function generateCURL(data) {
   let user_agent = "Emby/2 CFNetwork/1220.1 Darwin/20.3.0";
   let command = "curl -A '" + user_agent + "' -H 'Accept: */*' ";
-  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.url.replace(/"/g, '\"') + '" ';
+  command += '-o "' + data.video.filename.replace(/"/g, '\"') + '" ' + '"' + data.video.original_url.replace(/"/g, '\"') + '" ';
 
   for (let key in data.subtitles) {
     command +='-o "' + data.subtitles[key].filename.replace(/"/g, '\"') + '" ' + '"' + data.subtitles[key].url + '" ';
