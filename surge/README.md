@@ -25,7 +25,7 @@
 
 ### 模块安装及使用
 
-1. 在 iOS 或 macOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_merge.sgmodule` ；
+1. 在 iOS 或 macOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby.sgmodule` ；
 2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** ( 如果是剧集类型，需在要播放的那一集的详情页点更多按钮 )；
 3. 此时会看到各个不同的操作，根据需要选择。
 
