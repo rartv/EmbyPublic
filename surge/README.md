@@ -4,9 +4,8 @@
 
 ⚠️ **注意：**
 
-1. 下面提供的几个模块可以同时安装，但不能同时激活使用！
-2. 模之间切换之后，可能会由于浏览器缓存导致功能异常，请多刷新下网页或清除浏览器缓存 ( iOS 可以在 **手机设置** -> **Safari浏览器** -> **高级** -> **网站数据** -> 搜索 **emby** ，最后 **左划删除** 来清除缓存 )；
-3. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](https://embywiki.911997.xyz/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.html)，可以把那个模块禁用或删除。
+1. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](https://embywiki.911997.xyz/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.html)，可以把那个模块禁用或删除。
+2. 模块只能在浏览器中使用，不能在 Emby 客户端中使用！
 
 ⛔️ **封号警告：**
 
@@ -14,112 +13,15 @@
 2. 请勿**多任务大批量**的同时下载！
 3. 终点站有后台监控，超过某个阈值会自动封号，[封号记录查询频道](https://t.me/joinchat/U7M2tqH3NKErZmP_)
 
-
-## 🌐 浏览器中下载视频
-
-### 模块安装及使用
-
-1. 在 iOS 或 macOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby.sgmodule` ；
-2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载** ( 如果是剧集类型，需在要下载的那一集的详情页点下载按钮 )。
-
-### 限制
-
-1. 无法下载影片的外挂字幕；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用。
-
-### 效果
-
-![浏览器中下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/D41B9DC0-E715-4C98-B6BB-BBADC456BDA7_162833.jpeg)
-
-## 📖 使用 Shu 下载视频
-
-Shu 是 iOS 上最强的文件预览、解压、中转软件 ( 没有之一 ) ，我们可以使用它来下载视频 ( **包括外挂字幕** )。
-
-### 安装 Shu
-
-Shu 是一款付费软件，购买地址: [https://itunes.apple.com/app/id1282297037](https://itunes.apple.com/app/id1282297037)
-
-### 模块安装及使用
-
-1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_shu.sgmodule` ；
-2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载** ( 如果是剧集类型，需在要下载的那一集的详情页点下载按钮 )；
-3. 此时会弹出 **是否在 “Shu 文件” 中打开此页？** 的对话框，点击 **打开**；
-4. 跳转到 Shu 后会自动创建下载任务，点击 **新建下载任务** 页的 **右上角按钮** 开始下载；
-5. 长按下载的视频文件，导入 nPlayer 播放以提高播放体验。
-
-### 限制
-
-1. 只能在 iOS 中使用；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用。
-
-### 效果
-
-![使用 Shu 下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/49688D2F-2147-4D4D-A89D-2D299BCF92DB_162230.jpeg)
-
-## 🎬 使用 VLC 作为外置播放器在线播放
-
-### 安装 VLC 播放器
-
-VLC 是一款免费开源的播放软件，下载地址: [https://itunes.apple.com/app/id650377962](https://itunes.apple.com/app/id650377962)
-
-### 模块安装及使用
-
-1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_vlc.sgmodule` ；
-2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载** ( 如果是剧集类型，需在要播放的那一集的详情页点下载按钮 )；
-3. 此时会弹出 **是否在 “VLC” 中打开此页？** 的对话框，点击 **打开**；
-4. 跳转到 VLC 后等一下就开始播放了。
-
-### 限制
-
-1. 只能在 iOS 中使用；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用；
-3. 如果视频有外挂字幕，只支持外挂第一个字幕。
-
-### 效果
-
-![使用 VLC 播放器在线播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/A1B7ACE3-72AD-4C27-96FB-B1D4A847FA73_162248.jpeg)
-
-## 🎬 使用 nPlayer 作为外置播放器在线播放
-
-### 安装 nPlayer 播放器
-
-nPlayer 下载地址: [https://itunes.apple.com/app/id539397400](https://itunes.apple.com/app/id539397400)
-
-### 模块安装及使用
- 
-1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_nplayer.sgmodule` ；
-2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载** ( 如果是剧集类型，需在要播放的那一集的详情页点下载按钮 )；
-3. 此时会弹出 **是否在 “nPlayer” 中打开此页？** 的对话框，点击 **打开**；
-4. 跳转到 nPlayer 后等一下就开始播放了。
-
-### 限制
-
-1. 只能在 iOS 中使用；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用；
-3. 不支持外挂字幕。
-
-## 🎬 使用 Infuse 作为外置播放器在线播放
-
-### 安装 Infuse 播放器
-
-Infuse 下载地址: [https://itunes.apple.com/app/id1136220934](https://itunes.apple.com/app/id1136220934)
-
-### 模块安装及使用
-
-1. 在 iOS 版的 Surge 中以 URL 方式安装模块: `https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby_infuse.sgmodule` ；
-2. 在 **Safari 浏览器** 中打开终点站 **网站**，在影片详情页中点击 **更多** -> **下载** ( 如果是剧集类型，需在要播放的那一集的详情页点下载按钮 )；
-3. 此时会弹出 **是否在 “Infuse” 中打开此页？** 的对话框，点击 **打开**；
-4. 跳转到 Infuse 后等一下就开始播放了。
-
-### 限制
-
-1. 只能在 iOS 中使用；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用；
-3. 不支持外挂字幕。
-
 ## 🙏 多合一模块
 
-如果上面提到的软件你都经常使用，但切换模块后又不会立即生效，每次都要手动清理浏览器缓存，很麻烦。这时就需要一个把上面各模块合而为一的模块了。
+此模块包含了浏览器中下载视频、nPlayer 播放、VLC 播放、Infuse 播放的多种功能。
+
+### 外部软件下载地址
+
+1. [VLC](https://itunes.apple.com/app/id650377962)
+2. [nPlayer](https://itunes.apple.com/app/id539397400)
+3. [Infuse](https://itunes.apple.com/app/id1136220934)
 
 ### 模块安装及使用
 
@@ -129,9 +31,35 @@ Infuse 下载地址: [https://itunes.apple.com/app/id1136220934](https://itunes.
 
 ### 限制
 
-1. 调用第三方软件的功能只能在 iOS 中使用；
-2. 只能在浏览器中使用，不能在 Emby 客户端中使用。
+模块只能在浏览器中使用，不能在 Emby 客户端中使用！
+
+#### 🌐 浏览器中下载视频限制
+
+1. 无法下载影片的外挂字幕。
+
+#### 🎬 使用 VLC 作为外置播放器在线播放限制
+
+1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器；
+2. 如果视频有外挂字幕，只支持外挂第一个字幕。
+
+#### 🎬 使用 nPlayer 作为外置播放器在线播放限制
+
+1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器；
+2. 不支持外挂字幕。
+
+#### 🎬 使用 Infuse 作为外置播放器在线播放限制
+
+1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器；
+2. 不支持外挂字幕。
 
 ### 效果
 
 ![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/26/8ADFA930-2DF4-4A6C-B3E2-E5915862A028_051046.jpeg)
+
+![浏览器中下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/D41B9DC0-E715-4C98-B6BB-BBADC456BDA7_162833.jpeg)
+
+![使用 VLC 播放器在线播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/A1B7ACE3-72AD-4C27-96FB-B1D4A847FA73_162248.jpeg)
+
+![nPlayer 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/4CC03724-FC3D-4C27-9BC4-F33DCC9AFE53_075200.jpeg)
+
+![Infuse 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/5CC95C99-62BB-4C67-BCD9-6413121AD4B2_075140.jpeg)
