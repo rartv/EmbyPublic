@@ -157,7 +157,7 @@ function generateShuURL(data) {
     'header': {
       'User-Agent': user_agent,
     },
-    'url': data.video.url,
+    'url': data.video.original_url,
     'name': data.video.filename,
     'suspend': false,
   };
