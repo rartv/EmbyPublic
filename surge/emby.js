@@ -2,7 +2,7 @@
 *
 * @Title: emby.js
 *
-* @Description: iOS / macOS 的浏览器中下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
+* @Description: iOS / macOS 的浏览器中下载视频或外挂字幕 ( 如果影片有外挂字幕且选中，则下载外挂字幕文件，否则下载视频文件 )、使用 Shu 下载 ( 如果影片有外挂字幕，则下载全部外挂字幕 )、使用 nPlayer 播放 ( 不支持外挂字幕 )、使用 VLC 播放 ( 支持选中的外挂字幕 )、使用 Infuse 播放 ( 不支持外挂字幕 )。
 *
 * @author: https://t.me/AppleArcade
 *
