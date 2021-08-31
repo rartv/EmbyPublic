@@ -5,7 +5,7 @@
 ⚠️ **注意：**
 
 1. 模块中包含播放权限解锁的脚本，如果之前使用了 [单独的破解模块](https://embywiki.911997.xyz/use-on-various-devices/use-on-ios/use-official-client/crack-with-surge.html)，可以把那个模块禁用或删除。
-2. 模块只能在浏览器中使用，不能在 Emby 客户端中使用！
+2. 模块的下载和播放功能只能在浏览器中使用，不能在 Emby 客户端中使用！
 
 ⛔️ **封号警告：**
 
