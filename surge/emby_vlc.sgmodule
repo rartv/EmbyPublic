@@ -1,5 +1,5 @@
 #!name=Emby ( 多合一模块 )
-#!desc=Emby iOS/macOS 【客户端】播放权限解锁；【浏览器】中下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
+#!desc=1. Emby 官方 iOS/macOS【客户端】播放权限解锁；2. 【浏览器】中下载视频或外挂字幕 ( 如果影片有外挂字幕且选中，则下载外挂字幕文件，否则下载视频文件 )、使用 Shu 下载 ( 如果影片有外挂字幕，则下载全部外挂字幕 )、使用 nPlayer 播放 ( 不支持外挂字幕 )、使用 VLC 播放 ( 支持选中的外挂字幕 )、使用 Infuse 播放 ( 不支持外挂字幕 )。
 
 [Script]
 播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
