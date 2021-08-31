@@ -46,6 +46,7 @@ if ($request.url.indexOf('/Download') != -1){
     let video_id = $request.url.match(/emby\/Items\/(\S*)\/Download/)[1];
     let api_key = query.api_key;
     let media_source_id = query.mediaSourceId;
+    let subtitle_stream_index = typeof(query.subtitleStreamIndex) != "undefined" ? query.subtitleStreamIndex : "";
     let type = query.type;
     let video_info_url = host + '/emby/Users/' + user_id + '/Items/' + video_id;
     $httpClient.get({
@@ -80,7 +81,7 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 301, headers: {Location:nplayer_url_scheme} });
                     break;
                 case "vlc_play":
-                    let vlc_url_scheme = generateVlcURLScheme(download_info);
+                    let vlc_url_scheme = generateVlcURLScheme(download_info, subtitle_stream_index);
                     console.log("《" + video_data.SortName + "》 VLC 播放地址:\n" + vlc_url_scheme + "\n");
                     $done({status: 301, headers: {Location:vlc_url_scheme} });
                     break;
@@ -90,8 +91,24 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 301, headers: {Location:infuse_url_scheme} });
                     break;
                 default:
-                    console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
-                    $done({status: 301, headers: {'Location': download_info.video.original_url} });
+                    if (subtitle_stream_index !== "") {
+                      let subtitle_download_url = "";
+                      for (let key in download_info.subtitles) {
+                        if (download_info.subtitles[key].index == subtitle_stream_index) {
+                          subtitle_download_url = download_info.subtitles[key].url + "&filename=" + encodeURI(download_info.subtitles[key].filename);
+                          break;
+                        }
+                      }
+                      if (subtitle_download_url === "") {
+                        $done({});
+                      }else{
+                        console.log("《" + video_data.SortName + "》 字幕下载地址:\n" + subtitle_download_url + "\n");
+                        $done({status: 301, headers: {'Location': subtitle_download_url} });
+                      }
+                    }else{
+                      console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
+                      $done({status: 301, headers: {'Location': download_info.video.original_url} });
+                    }
             }
             break;
           }
@@ -102,13 +119,24 @@ if ($request.url.indexOf('/Download') != -1){
   }
 }
 
+if ($request.url.indexOf('/web/item/item.js') != -1) {
+  let body = $response.body;
+  let find = 'var selectSource=view.querySelector(".selectSource"),';
+  let replace = 'var selectSource=view.querySelector(".selectSource"),selectSubtitles=view.querySelector(".selectSubtitles"),';
+  body = body.replace(find, replace);
+  find = 'mediaSourceId:selectSource&&selectSource.value||null,';
+  replace = 'mediaSourceId:selectSource&&selectSource.value||null,subtitleStreamIndex:selectSubtitles&&selectSubtitles.value||"",';
+  body = body.replace(find, replace);
+  $done({status: $response.status, headers: $response.headers, body: body });
+}
+
 if ($request.url.indexOf('/web/modules/itemcontextmenu.js') != -1) {
     let body = $response.body;
     let find = ',"MediaStream"===item.Type&&item.IsExternal&&"Subtitle"===item.StreamType&&appHost.supports("filedownload")';
     let replace = '&&commands.push({name:"\u0053\u0068\u0075\u0020\u4e0b\u8f7d",id:"shu_download",icon:"download"})&&commands.push({name:"\u006e\u0050\u006c\u0061\u0079\u0065\u0072\u0020\u64ad\u653e",id:"nplayer_play",icon:"play_arrow"})&&commands.push({name:"\u0056\u004c\u0043\u0020\u64ad\u653e",id:"vlc_play",icon:"play_arrow"})&&commands.push({name:"\u0049\u006e\u0066\u0075\u0073\u0065\u0020\u64ad\u653e",id:"infuse_play",icon:"play_arrow"}),"MediaStream"===item.Type&&item.IsExternal&&"Subtitle"===item.StreamType&&appHost.supports("filedownload")';
     body = body.replace(find, replace);
     find = 'default:return commandProcessor.executeCommand(id,item,options).then(getResolveFn(id))';
-    replace = 'case"nplayer_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=nplayer_play";require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"shu_download":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=shu_download";require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"vlc_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return true}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=vlc_play";require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"infuse_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=infuse_play";require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;default:return commandProcessor.executeCommand(id,item,options).then(getResolveFn(id))';
+    replace = 'case"download":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId);if(options.subtitleStreamIndex.length!==""){var SubtitleDownloadUrl=ItemDownloadUrl+"&subtitleStreamIndex="+options.subtitleStreamIndex;require(["multi-download"]).then(function(responses){(0,responses[0])([SubtitleDownloadUrl])})}require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"nplayer_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=nplayer_play&subtitleStreamIndex="+options.subtitleStreamIndex;require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"shu_download":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=shu_download&subtitleStreamIndex="+options.subtitleStreamIndex;require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"vlc_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return true}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=vlc_play&subtitleStreamIndex="+options.subtitleStreamIndex;require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;case"infuse_play":var mediaSourceId=options?options.mediaSourceId:null;if(mediaSourceId==null){return false}var ItemDownloadUrl=apiClient.getItemDownloadUrl(item.Id,mediaSourceId)+"&type=infuse_play&subtitleStreamIndex="+options.subtitleStreamIndex;require(["multi-download"]).then(function(responses){(0,responses[0])([ItemDownloadUrl])});return true;default:return commandProcessor.executeCommand(id,item,options).then(getResolveFn(id))';
     body = body.replace(find, replace);
     $done({status: $response.status, headers: $response.headers, body: body });
 }
@@ -124,7 +152,8 @@ function downloadInfo (host, video_id, media_source, api_key) {
     let media_streams = media_source.MediaStreams[key];
     if (media_streams.Type == 'Subtitle' && media_streams.IsExternal == 1 && media_streams.IsTextSubtitleStream == 1 ) {
       let subtitle = new Object();
-      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/0/Stream.' + media_streams.Codec + '?api_key=' + api_key;
+      subtitle.index = media_streams.Index;
+      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/Stream.' + media_streams.Codec + '?api_key=' + api_key;
       subtitle.filename = getFileName(media_streams.Path);
       subtitles[array_index] = subtitle;
       array_index++;
@@ -174,11 +203,13 @@ function generateShuURL(data) {
   return 'shu://gui.download.http?urls=' + encodeURIComponent(JSON.stringify(urls));
 }
 
-function generateVlcURLScheme(data) {
+function generateVlcURLScheme(data, subtitle_stream_index) {
   let vlc_x_callback = "vlc-x-callback://x-callback-url/stream?url=" + encodeURIComponent(data.video.url);
-  for (let key in data.subtitles) { // 添加字幕
-    vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url);
-    break;  // 由于 VLC 的 x-callback-url 限制，只支持加载一个 URL 字幕
+  for (let key in data.subtitles) {
+    if (data.subtitles[key].index == subtitle_stream_index) {
+      vlc_x_callback += "&sub=" + encodeURIComponent(data.subtitles[key].url);
+      break;
+    }
   }
   return vlc_x_callback;
 }
