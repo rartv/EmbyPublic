@@ -1,0 +1,11 @@
+#!name=Emby ( 测试模块 )
+#!desc=Emby iOS/macOS 【客户端】播放权限解锁；【浏览器】中下载视频、使用 Shu 下载、使用 nPlayer 播放、使用 VLC 播放、使用 Infuse 播放。
+
+[Script]
+播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
+视频下载 = type=http-response,pattern=(\/emby\/Users\/\w{32}\?)|(\/emby\/Users\/\w{32}\/Items\/\d+\?)|(\/emby\/Items\/\d+\/Download)|(\/web\/modules\/itemcontextmenu\.js),requires-body=true,max-size=0,script-path=emby.js,debug=true
+下载路径重命名 = type=http-request,pattern=\/Videos\/\d+\/stream\/.+\?.+,requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_path_rename.js,debug=false
+下载文件重命名 = type=http-response,pattern=\/Videos\/\d+\/stream\?.+&filename,requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_file_rename.js,debug=false
+
+[MITM]
+hostname = %APPEND% mb3admin.com, *.emby.wtf:0
