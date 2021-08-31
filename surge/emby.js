@@ -100,7 +100,8 @@ if ($request.url.indexOf('/Download') != -1){
                         }
                       }
                       if (subtitle_download_url === "") {
-                        $done({});
+                        console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
+                        $done({status: 301, headers: {'Location': download_info.video.original_url} });
                       }else{
                         console.log("《" + video_data.SortName + "》 字幕下载地址:\n" + subtitle_download_url + "\n");
                         $done({status: 301, headers: {'Location': subtitle_download_url} });
