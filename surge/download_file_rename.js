@@ -12,14 +12,18 @@
 *
 */
 
-if ($request.url.indexOf('/Videos/') != -1) {
+if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('&filename=') != -1) {
   if($response.status==200){
     let query = getQueryVariable($request.url);
-    $response.headers['Content-Disposition'] = 'attachment;filename=' + decodeURI(query.filename);
-    $done({
-      status: 200,
-      headers: $response.headers
-    })
+    if (typeof(query.filename) == "undefined" || query.filename == "") {
+      $done({});
+    }else{
+      $response.headers['Content-Disposition'] = 'attachment;filename=' + decodeURI(query.filename);
+      $done({
+        status: 200,
+        headers: $response.headers
+      })
+    }
   }else{
     $done({});
   }
