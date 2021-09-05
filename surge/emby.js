@@ -12,20 +12,18 @@
 *
 */
 
-if ($request.url.indexOf('/emby/Users/') != -1) {
+if ($request.url.indexOf('/Users/') != -1) {
   if($response.status==200){
     $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
     let body = JSON.parse($response.body);
-    let user_id_result = $request.url.match(/\/emby\/Users\/(\w{32})/);
+    let user_id_result = $request.url.match(/\/Users\/(\w{32})/);
     if (typeof(user_id_result) != "undefined") {
       $persistentStore.write(user_id_result[1], 'user_id');
     }
     let query = getQueryVariable($request.url);
     $persistentStore.write(query['X-Emby-Client'], 'X-Emby-Client');
-    $persistentStore.write(query['X-Emby-Device-Name'], 'X-Emby-Device-Name');
     $persistentStore.write(query['X-Emby-Device-Id'], 'X-Emby-Device-Id');
     $persistentStore.write(query['X-Emby-Client-Version'], 'X-Emby-Client-Version');
-    $persistentStore.write(query['X-Emby-Token'], 'X-Emby-Token');
     $done({status: 200, headers: $response.headers, body: JSON.stringify(body) });
   }else{
     $done({});
@@ -34,21 +32,19 @@ if ($request.url.indexOf('/emby/Users/') != -1) {
 
 if ($request.url.indexOf('/Download') != -1){
   if($response.status==401){
-    let user_id = $persistentStore.read('user_id');
-    let X_Emby_Client = $persistentStore.read('X-Emby-Client');
-    let X_Emby_Device_Name = $persistentStore.read('X-Emby-Device-Name');
-    let X_Emby_Device_Id = $persistentStore.read('X-Emby-Device-Id');
-    let X_Emby_Client_Version = $persistentStore.read('X-Emby-Client-Version');
-    let X_Emby_Token = $persistentStore.read('X-Emby-Token');
-    let X_Emby_Authorization = "MediaBrowser Device=\""+X_Emby_Device_Name+"\", DeviceId=\""+X_Emby_Device_Id+"\", Version=\""+X_Emby_Client_Version+"\", Client=\""+X_Emby_Client+"\", Token=\""+X_Emby_Token+"\"";
     let host = getHost($request.url);
     let query = getQueryVariable($request.url);
-    let video_id = $request.url.match(/emby\/Items\/(\S*)\/Download/)[1];
+    let video_id = $request.url.match(/\/Items\/(\S*)\/Download/)[1];
     let api_key = query.api_key;
     let media_source_id = query.mediaSourceId;
     let subtitle_stream_index = typeof(query.subtitleStreamIndex) != "undefined" ? query.subtitleStreamIndex : "";
     let type = query.type;
-    let video_info_url = host + '/emby/Users/' + user_id + '/Items/' + video_id;
+    let user_id = $persistentStore.read('user_id');
+    let video_info_url = host + '/Users/' + user_id + '/Items/' + video_id;
+    let X_Emby_Client = $persistentStore.read('X-Emby-Client');
+    let X_Emby_Device_Id = $persistentStore.read('X-Emby-Device-Id');
+    let X_Emby_Client_Version = $persistentStore.read('X-Emby-Client-Version');
+    let X_Emby_Authorization = "MediaBrowser Device=\"Download\", DeviceId=\""+X_Emby_Device_Id+"\", Version=\""+X_Emby_Client_Version+"\", Client=\""+X_Emby_Client+"\", Token=\""+api_key+"\"";
     $httpClient.get({
       url: video_info_url,
       headers: {
@@ -57,7 +53,6 @@ if ($request.url.indexOf('/Download') != -1){
       },
     }, function(error, response, data){
       if (error) {
-        console.log(error);
         $notification.post("影片信息获取失败️", "", error);
         $done();
       }else{
@@ -240,11 +235,5 @@ function getQueryVariable(url){
 }
 
 function getHost(url) {
-  let index=url.lastIndexOf('/emby/');
-  let host = url.substring(0, index);
-  if (host.length == 0) {
-    return null;
-  }else{
-    return host;
-  }
+  return url.toLowerCase().match(/^(https?:\/\/.*?)\//)[1];
 }
