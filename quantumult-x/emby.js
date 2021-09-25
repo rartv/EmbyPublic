@@ -104,7 +104,7 @@ if ($request.url.indexOf('/Download') != -1){
                       }else{
                         console.log("《" + video_data.SortName + "》 字幕下载地址:\n" + subtitle_download_url + "\n");
                         $util.done({status: 301, headers: {'Location': subtitle_download_url} });
-                        $util.done({body: "subtitle download", headers: {Location:download_info.video.original_url}, status: "HTTP/1.1 302 Found"})
+                        $util.done({body: "subtitle download", headers: {Location:subtitle_download_url}, status: "HTTP/1.1 302 Found"})
                       }
                     }else{
                       console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
