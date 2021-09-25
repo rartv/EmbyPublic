@@ -4,7 +4,7 @@
 [Script]
 播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
 视频下载 = type=http-response,pattern=((\/emby)*\/Users\/\w{32}\/Items\/\d+\?)|((\/emby)*\/Items\/\d+\/Download)|(\/web\/modules\/itemcontextmenu\.js)|(\/web\/item\/item\.js),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby.js,debug=false
-下载路径重命名 = type=http-request,pattern=\/Videos\/\d+\/stream\/.+\?.+,requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_path_rename.js,debug=false
+下载路径重命名 = type=http-request,pattern=\/Videos\/\d+\/stream\/.+\?.+,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_path_rename.js,debug=false
 下载文件重命名 = type=http-response,pattern=(\/Videos\/\d+\/stream\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/.+&filename),requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_file_rename.js,debug=false
 
 [MITM]
