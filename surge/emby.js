@@ -68,22 +68,22 @@ if ($request.url.indexOf('/Download') != -1){
                 case "shu_download":
                     let shu_download_url = generateShuURL(download_info);
                     console.log("《" + video_data.SortName + "》 Shu 批量下载地址:\n" + shu_download_url + "\n");
-                    $done({status: 302, headers: {Location:shu_download_url} });
+                    $done({status: 302, headers: {Location:shu_download_url}, body: ""});
                     break;
                 case "nplayer_play":
                     let nplayer_url_scheme = generateNplayerURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 nPlayer 播放地址:\n" + nplayer_url_scheme + "\n");
-                    $done({status: 302, headers: {Location:nplayer_url_scheme} });
+                    $done({status: 302, headers: {Location:nplayer_url_scheme}, body: ""});
                     break;
                 case "vlc_play":
                     let vlc_url_scheme = generateVlcURLScheme(download_info, subtitle_stream_index);
                     console.log("《" + video_data.SortName + "》 VLC 播放地址:\n" + vlc_url_scheme + "\n");
-                    $done({status: 302, headers: {Location:vlc_url_scheme} });
+                    $done({status: 302, headers: {Location:vlc_url_scheme}, body: ""});
                     break;
                 case "infuse_play":
                     let infuse_url_scheme = generateInfuseURLScheme(download_info);
                     console.log("《" + video_data.SortName + "》 Infuse 播放地址:\n" + infuse_url_scheme + "\n");
-                    $done({status: 302, headers: {Location:infuse_url_scheme} });
+                    $done({status: 302, headers: {Location:infuse_url_scheme}, body: ""});
                     break;
                 default:
                     if (subtitle_stream_index !== "" && subtitle_stream_index != -1) {
@@ -96,14 +96,14 @@ if ($request.url.indexOf('/Download') != -1){
                       }
                       if (subtitle_download_url === "") {
                         console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
-                        $done({status: 302, headers: {'Location': download_info.video.original_url} });
+                        $done({status: 302, headers: {'Location': download_info.video.original_url}, body: ""});
                       }else{
                         console.log("《" + video_data.SortName + "》 字幕下载地址:\n" + subtitle_download_url + "\n");
-                        $done({status: 302, headers: {'Location': subtitle_download_url} });
+                        $done({status: 302, headers: {'Location': subtitle_download_url}, body: ""});
                       }
                     }else{
                       console.log("《" + video_data.SortName + "》 视频下载地址:\n" + download_info.video.original_url + "\n");
-                      $done({status: 302, headers: {'Location': download_info.video.original_url} });
+                      $done({status: 302, headers: {'Location': download_info.video.original_url}, body: ""});
                     }
             }
             break;
