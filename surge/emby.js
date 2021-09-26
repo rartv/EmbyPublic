@@ -71,7 +71,7 @@ if ($request.url.indexOf('/Download') != -1){
                     $done({status: 302, headers: {Location:shu_download_url}, body: ""});
                     break;
                 case "vlc_download":
-                    let vlc_download_url_scheme = generateVlcPlayDownloadURLScheme(download_info, subtitle_stream_index);
+                    let vlc_download_url_scheme = generateVlcDownloadURLScheme(download_info, subtitle_stream_index);
                     console.log("《" + video_data.SortName + "》 VLC 下载地址:\n" + vlc_download_url_scheme + "\n");
                     $done({status: 302, headers: {Location:vlc_download_url_scheme}, body: ""});
                     break;
@@ -95,7 +95,7 @@ if ($request.url.indexOf('/Download') != -1){
                       let subtitle_download_url = "";
                       for (let key in download_info.subtitles) {
                         if (download_info.subtitles[key].index == subtitle_stream_index) {
-                          subtitle_download_url = download_info.subtitles[key].url + "&filename=" + encodeURI(download_info.subtitles[key].filename);
+                          subtitle_download_url = download_info.subtitles[key].url;
                           break;
                         }
                       }
@@ -155,8 +155,8 @@ function downloadInfo (host, video_id, media_source, api_key) {
       let subtitle = new Object();
       subtitle.index = media_streams.Index;
       subtitle.filename = getFileName(media_streams.Path);
-      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/' + encodeURI(subtitle.filename) + '?api_key=' + api_key + '&sub_codec=' + media_streams.Codec;
-      subtitle.original_url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/Stream.' + media_streams.Codec + '?api_key=' + api_key + '&sub_codec=' + media_streams.Codec;
+      subtitle.url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/' + encodeURI(subtitle.filename) + '?api_key=' + api_key + '&sub_codec=' + media_streams.Codec + '&filename=' + encodeURI(subtitle.filename);
+      subtitle.original_url = host + '/Videos/'+ video_id +'/' + media_source.Id + '/Subtitles/' + media_streams.Index + '/Stream.' + media_streams.Codec + '?api_key=' + api_key;
       subtitles[array_index] = subtitle;
       array_index++;
     }
@@ -216,7 +216,7 @@ function generateVlcPlayURLScheme(data, subtitle_stream_index) {
   return vlc_x_callback;
 }
 
-function generateVlcPlayDownloadURLScheme(data, subtitle_stream_index) {
+function generateVlcDownloadURLScheme(data, subtitle_stream_index) {
     let download_file = data.video.url;
     let download_filename = data.video.filename;
     for (let key in data.subtitles) {
