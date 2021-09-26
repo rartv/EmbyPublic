@@ -24,7 +24,10 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('/Subtitles/'
     });
 }
 if ($request.url.indexOf('/Videos/') != -1 && $request.method == 'GET') {
-    $request.url = $request.url.replace(/\/stream\/.+\?mediaSourceId/, '/stream\?mediaSourceId');
+    if (typeof(query.filename) == "undefined" || query.filename == "") {
+        $done({});
+    }
+    $request.url = $request.url.replace(query.filename, 'stream');
     $done({
         url: $request.url,
         headers: $request.headers
