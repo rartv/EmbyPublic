@@ -26,7 +26,7 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('/Subtitles/'
     if (typeof(query.filename) == "undefined" || query.filename == "") {
         $done({});
     }
-    $request.url = $request.url.replace('/' + query.filename, '/stream');
+    $request.url = $request.url.replace('/' + query.filename, '');
     $done({
         url: $request.url,
         headers: $request.headers
