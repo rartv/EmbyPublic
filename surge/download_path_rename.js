@@ -6,7 +6,7 @@
 *
 * @author: https://t.me/AppleArcade
 *
-* @version V1.0
+* @version V1.1
 *
 * @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
 *

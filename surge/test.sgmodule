@@ -1,10 +1,10 @@
-#!name=Emby ( 本地测试模块 )
-#!desc=1. Emby 官方 iOS/macOS【客户端】播放权限解锁；2. 【浏览器】中下载视频或外挂字幕 ( 如果影片有外挂字幕且选中，则下载外挂字幕文件，否则下载视频文件 )、使用 Shu 下载 ( 如果影片有外挂字幕，则下载全部外挂字幕 )、使用 nPlayer 播放 ( 不支持外挂字幕 )、使用 VLC 播放 ( 支持选中的外挂字幕 )、使用 Infuse 播放 ( 不支持外挂字幕 )。
+#!name=Emby V1.1 ( 本地测试模块 )
+#!desc=1. Emby 官方 iOS/macOS【客户端】播放权限解锁；2. 【浏览器】中下载视频或外挂字幕 ( 如果影片有外挂字幕且选中，则下载外挂字幕文件，否则下载视频文件 )、使用 Shu 下载 ( 如果影片有外挂字幕，则下载全部外挂字幕 )、使用 iOS 版 VLC 下载 ( 如果影片有外挂字幕且选中，则下载外挂字幕文件，否则下载视频文件 )、使用 iOS 版 nPlayer 播放 ( 不支持外挂字幕 )、使用 VLC 播放 ( 支持选中的外挂字幕 )、使用 iOS 和 macOS 版 Infuse 播放 ( 不支持外挂字幕 )。
 
 [Script]
 播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
 视频下载 = type=http-response,pattern=((\/emby)*\/Users\/\w{32}\/Items\/\d+\?)|((\/emby)*\/Items\/\d+\/Download)|(\/web\/modules\/itemcontextmenu\.js)|(\/web\/item\/item\.js),requires-body=true,max-size=0,script-path=emby.js,debug=true
-下载路径重命名 = type=http-request,pattern=(\/Videos\/\d+\/stream\/.+\?.+)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+),script-path=download_path_rename.js,debug=true
+请求路径重命名 = type=http-request,pattern=(\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename),script-path=download_path_rename.js,debug=true
 下载文件重命名 = type=http-response,pattern=(\/Videos\/\d+\/stream\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/.+&filename),requires-body=false,max-size=0,script-path=download_file_rename.js,debug=true
 
 [MITM]
