@@ -15,7 +15,7 @@
 
 ## 🙏 多合一模块
 
-此模块包含了浏览器中下载视频、nPlayer 播放、VLC 播放、Infuse 播放的多种功能。
+此模块包含了浏览器中下载视频、Shu 下载、nPlayer 播放、VLC 播放和下载、Infuse 播放、IINA 播放的多种功能。
 
 ### 外部软件下载地址
 
@@ -23,6 +23,7 @@
 2. [nPlayer Plus](https://itunes.apple.com/app/id539397400)
 3. [Infuse 7](https://itunes.apple.com/app/id1136220934)
 4. [Magic File Viewer - Shu](https://itunes.apple.com/app/id1282297037)
+5. [IINA](https://iina.io)
 
 ### 模块安装及使用
 
@@ -62,13 +63,17 @@
 
 1. 不支持外挂字幕。
 
+#### 🎬 使用 IINA 作为外置播放器在线播放限制
+
+1. 不支持外挂字幕。
+
 #### 📖 使用 Shu 下载视频和字幕
 
 1. 只能在 iOS 浏览器中使用，不支持 macOS 浏览器。
 
 ### 效果
 
-![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/26/8ADFA930-2DF4-4A6C-B3E2-E5915862A028_051046.jpeg)
+![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/IMG_6251_023536.jpeg)
 
 ![浏览器中下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/D41B9DC0-E715-4C98-B6BB-BBADC456BDA7_162833.jpeg)
 
@@ -76,6 +81,10 @@
 
 ![nPlayer 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/4CC03724-FC3D-4C27-9BC4-F33DCC9AFE53_075200.jpeg)
 
-![Infuse 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/5CC95C99-62BB-4C67-BCD9-6413121AD4B2_075140.jpeg)
+![Infuse for iOS 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/28/5CC95C99-62BB-4C67-BCD9-6413121AD4B2_075140.jpeg)
 
 ![使用 Shu 下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/49688D2F-2147-4D4D-A89D-2D299BCF92DB_162230.jpeg)
+
+![Infuse for macOS 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/CC8939D0-441F-4C12-9DC6-F074F6A5326A_023203.jpeg)
+
+![IINA 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/FA5F29A7-C87E-48BA-AD2A-2A6FFCB03CB6_022626.jpeg)
