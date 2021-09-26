@@ -17,7 +17,6 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('/Subtitles/'
         $done({});
     }
     $request.url = $request.url.replace('/' + query.filename, '/Stream.' + query.sub_codec);
-    console.log($request.url);
     $done({
         url: $request.url,
         headers: $request.headers
