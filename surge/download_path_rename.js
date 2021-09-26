@@ -16,7 +16,7 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('/Subtitles/'
     if (typeof(query.sub_codec) == "undefined" && query.sub_codec == "" && typeof(query.filename) == "undefined" || query.filename == "") {
         $done({});
     }
-    $request.url = $request.url.replace(query.filename, 'Stream.' + query.sub_codec);
+    $request.url = $request.url.replace('/' + query.filename, '/Stream.' + query.sub_codec);
     console.log($request.url);
     $done({
         url: $request.url,
@@ -27,7 +27,7 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.method == 'GET') {
     if (typeof(query.filename) == "undefined" || query.filename == "") {
         $done({});
     }
-    $request.url = $request.url.replace(query.filename, 'stream');
+    $request.url = $request.url.replace('/' + query.filename, '/stream');
     $done({
         url: $request.url,
         headers: $request.headers
