@@ -22,8 +22,8 @@ if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('/Subtitles/'
         url: $request.url,
         headers: $request.headers
     });
-}
-if ($request.url.indexOf('/Videos/') != -1 && $request.method == 'GET') {
+} else if ($request.url.indexOf('/Videos/') != -1 && $request.method == 'GET') {
+    let query = getQueryVariable($request.url);
     if (typeof(query.filename) == "undefined" || query.filename == "") {
         $done({});
     }
