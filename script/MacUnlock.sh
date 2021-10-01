@@ -17,11 +17,6 @@ fi
 
 echo "已安装 Emby 客户端，准备解锁 Emby 播放权限"
 
-if [ -f "${ConnectionManagerFile}.bak" ]; then
-    echo -e "\033[32mEmby 播放权限 已解锁，无需重复操作\033[0m"
-    exit 0
-fi
-
 reject='var status=(response||{}).status;return console.log("getRegistrationInfo response: "+status),403===status?Promise.reject("overlimit"):status&&status<500?Promise.reject():function(err){if(console.log("getRegistrationInfo failed: "+err),regCacheValid)return console.log("getRegistrationInfo returning cached info"),Promise.resolve();throw err}(response)'
 resolve='return appStorage.setItem(cacheKey,JSON.stringify({lastValidDate:Date.now(),deviceId:params.deviceId,cacheExpirationDays:999})),Promise.resolve()'
 
