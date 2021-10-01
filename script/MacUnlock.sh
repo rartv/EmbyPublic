@@ -8,7 +8,7 @@ else
 fi
 
 EmbyApp="/Applications/Emby.app"
-ConnectionManagerFile="${EmbyApp}/Contents/Resources/www/bower_components/emby-apiclient/connectionmanager.js"
+ConnectionManagerFile="${EmbyApp}/Contents/Resources/www/modules/emby-apiclient/connectionmanager.js"
 
 if [ ! -f "$ConnectionManagerFile" ]; then
     echo -e "\033[31m请先从 https://itunes.apple.com/us/app/emby/id992180193?ls=1&mt=8 安装 Emby 客户端，然后再运行本解锁程序\033[0m"
