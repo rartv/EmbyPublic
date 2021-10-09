@@ -78,7 +78,7 @@
 
 ### 效果
 
-![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/IMG_6251_023536.jpeg)
+![多合一模块](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/10/9/5111409B-CFF4-4B04-B607-258417337813_202049.jpeg)
 
 ![浏览器中下载视频](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/8/19/D41B9DC0-E715-4C98-B6BB-BBADC456BDA7_162833.jpeg)
 
