@@ -93,3 +93,5 @@
 ![Infuse for macOS 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/CC8939D0-441F-4C12-9DC6-F074F6A5326A_023203.jpeg)
 
 ![IINA 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/9/27/FA5F29A7-C87E-48BA-AD2A-2A6FFCB03CB6_022626.jpeg)
+
+![IINA 播放](https://raw.githubusercontent.com/tingv/image/Shortcuts/2021/10/9/8D17192C-A196-41A4-A790-D70C74F7CC0D_201215.jpeg)
