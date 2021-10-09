@@ -15,7 +15,7 @@
 
 ## 🙏 多合一模块
 
-此模块包含了浏览器中下载视频、Shu 下载、nPlayer 播放、VLC 播放和下载、Infuse 播放、IINA 播放的多种功能。
+此模块包含了浏览器中下载视频、Shu 下载、nPlayer 播放、VLC 播放和下载、Infuse 播放、IINA 播放、Movist Pro 播放的多种功能。
 
 ### 外部软件下载地址
 
