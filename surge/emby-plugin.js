@@ -144,6 +144,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
   $done({});
 }
 
+
 function getHost(url) {
   return url.toLowerCase().match(/^(https?:\/\/.*?)\//)[1];
 }
