@@ -112,8 +112,8 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     requestURL = $request.url.replace('/' + query['filename'], '');
   } else {
     requestURL = $request.path.replace('/' + query['filename'], '');
+    console.log(requestURL)
   }
-  console.log(requestURL)
   $done({
     url: requestURL,
     headers: $request.headers
