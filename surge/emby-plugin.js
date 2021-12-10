@@ -126,7 +126,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
   if(isSurge){
     requestURL = $request.url.replace('/' + query['filename'], '');
   } else {
-    requestURL = $request.path.replace('/' + query['filename'], '');
+    requestURL = $request.url.replace('/' + query['filename'], '');
   }
   $done({
     url: requestURL,
