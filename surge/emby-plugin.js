@@ -32,8 +32,8 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
 
       let Name = '';
       item['MediaStreams'].forEach((t, i) => {
-        if(t['Type'] === 'Video'){
-          Name = ' - ' + t['DisplayTitle']
+        if(t['Type'] === 'Video' && item['Name']){
+          Name = ' - ' + item['Name']
         }
 
         if(t['Type'] === 'Subtitle' && t['IsExternal'] && t['Path']){
