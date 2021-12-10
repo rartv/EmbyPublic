@@ -108,17 +108,19 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     $done({});
   }
   let isSurge = typeof $httpClient != "undefined";
-  if(isSurge){
+    if(isSurge){
     requestURL = $request.url.replace('/' + query['filename'], '');
+    $done({
+      url: requestURL,
+      headers: $request.headers
+    });
   } else {
     requestURL = $request.path.replace('/' + query['filename'], '');
+    $done({
+      path: requestURL,
+      headers: $request.headers
+    });
   }
-  console.log(requestURL)
-  $done({
-    url: requestURL,
-    headers: $request.headers
-  });
-
 }else if(requestURL.indexOf('/Videos/') != -1 && requestURL.indexOf('/Subtitles/') != -1){ // 字幕路径伪静态
   let query = getQueryVariable(requestURL);
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
@@ -127,15 +129,17 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
   let isSurge = typeof $httpClient != "undefined";
   if(isSurge){
     requestURL = $request.url.replace('/' + query['filename'], '');
+    $done({
+      url: requestURL,
+      headers: $request.headers
+    });
   } else {
     requestURL = $request.path.replace('/' + query['filename'], '');
+    $done({
+      path: requestURL,
+      headers: $request.headers
+    });
   }
-  console.log(requestURL)
-  $done({
-    url: requestURL,
-    headers: $request.headers
-  });
-
 }else {
   $done({});
 }
