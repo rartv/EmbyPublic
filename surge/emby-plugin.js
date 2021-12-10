@@ -107,7 +107,12 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
     $done({});
   }
-  requestURL = requestURL.replace('/' + query['filename'], '');
+  let isSurge = typeof $httpClient != "undefined";
+  if(isSurge){
+    requestURL = $request.url.replace('/' + query['filename'], '');
+  } else {
+    requestURL = $request.path.replace('/' + query['filename'], '');
+  }
   $done({
     url: requestURL,
     headers: $request.headers
@@ -117,7 +122,12 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
     $done({});
   }
-  requestURL = requestURL.replace('/' + query['filename'], '');
+  let isSurge = typeof $httpClient != "undefined";
+  if(isSurge){
+    requestURL = $request.url.replace('/' + query['filename'], '');
+  } else {
+    requestURL = $request.path.replace('/' + query['filename'], '');
+  }
   $done({
     url: requestURL,
     headers: $request.headers
