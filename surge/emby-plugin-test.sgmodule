@@ -1,4 +1,4 @@
-#!name=Emby Plugin
+#!name=Emby Plugin Test
 #!desc=Emby 官方客户端内调用外部播放器 (本模块和脚本由终点站 VIP 群 @renzhipengBot 原创，@AppleArcade 魔改。转载或魔改请注明出处！)
 
 [Script]
