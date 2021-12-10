@@ -1,0 +1,12 @@
+#!name=Emby Plugin
+#!desc=Emby 官方客户端内调用外部播放器 (本模块和脚本由终点站 VIP 群 @renzhipengBot 原创，@AppleArcade 魔改。转载或魔改请注明出处！)
+
+[Script]
+播放解锁 = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/unlock.js,debug=false
+添加外部播放器连接 = type=http-response,pattern=\/Users\/\w{32}\/Items\/\d+\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js,debug=false
+打开外部播放器 = type=http-response,pattern=\/plugin\/scheme,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js,debug=false
+资源路径伪静态 = type=http-request,pattern=(\/Videos\/\d+\/stream\/.+\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/\d+\/.+\?.+&filename),script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js,debug=false
+下载文件重命名 = type=http-response,pattern=(\/Videos\/\d+\/stream\?.+&filename)|(\/Videos\/\d+\/\w{32}\/Subtitles\/.+&filename),requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/download_file_rename.js,debug=false
+
+[MITM]
+hostname = %APPEND% mb3admin.com, *.emby.wtf:0, *.plusmedia.site:0, *.jmsooo.com:0
