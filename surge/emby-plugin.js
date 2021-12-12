@@ -102,7 +102,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     headers: { Location: LocationURL }, 
     body: ""
   });
-}else if(requestURL.indexOf('/Videos/') != -1 && requestURL.indexOf('/stream/') != -1){  // 视频路径伪静态
+}else if(requestURL.indexOf('/Videos/') != -1 && (requestURL.indexOf('/stream/') != -1 || requestURL.indexOf('/Subtitles/') != -1) ){  // 资源路径伪静态
   let query = getQueryVariable(requestURL);
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
     $done({});
@@ -121,34 +121,13 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
       headers: $request.headers
     });
   }
-}else if(requestURL.indexOf('/Videos/') != -1 && requestURL.indexOf('/Subtitles/') != -1){ // 字幕路径伪静态
-  let query = getQueryVariable(requestURL);
-  if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
-    $done({});
-  }
-  let isSurge = typeof $httpClient != "undefined";
-  if(isSurge){
-    requestURL = $request.url.replace('/' + query['filename'], '');
-    $done({
-      url: requestURL,
-      headers: $request.headers
-    });
-  } else {
-    requestURL = $request.path.replace('/' + query['filename'], '');
-    $done({
-      path: requestURL,
-      headers: $request.headers
-    });
-  }
 }else {
   $done({});
 }
 
-
 function getHost(url) {
   return url.toLowerCase().match(/^(https?:\/\/.*?)\//)[1];
 }
-
 
 function getQueryVariable(url) {
   let index = url.lastIndexOf('?');
