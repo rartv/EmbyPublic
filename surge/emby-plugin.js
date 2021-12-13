@@ -19,11 +19,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
 
   if(obj.MediaSources){
     obj.MediaSources.forEach((item, index) => {
-      if (item['Path']) {
-        var fileName = item['Path'].substring(item['Path'].lastIndexOf('/') + 1);
-      } else {
-        var fileName = (obj.SeriesName ? obj.SeriesName+ '-' : '') + (obj.SeasonName ? obj.SeasonName+ '-' : '') + (obj.IndexNumber ? obj.IndexNumber+ '-' : '') + obj.Name
-      }
+      let fileName = item['Path'] ? item['Path'].substring(item['Path'].lastIndexOf('/') + 1) : obj.Name;
       let videoUrl = host + '/Videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['X-Emby-Token'] + '&filename=' + encodeURIComponent(fileName);
       let shuInfo = [{
         'header': {
