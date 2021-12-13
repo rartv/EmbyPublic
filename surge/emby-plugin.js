@@ -33,7 +33,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
       let Name = '';
       item['MediaStreams'].forEach((t, i) => {
         if(t['Type'] === 'Video' && item['Name']){
-          Name = ' - ' + item['Name']
+          Name = ' - ' + item['Name'] + ' (' + t['DisplayTitle'] + ')'
         }
 
         if(t['Type'] === 'Subtitle' && t['IsExternal'] && t['Path']){
@@ -85,7 +85,13 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     });
   }
 
-  obj.ExternalUrls = [...obj.ExternalUrls, ...infusePlay, ...nplayerPlay, ...vlcPlay, ...iinaPlay, ...movistproPlay, ...shuDownload];
+  if(obj.ExternalUrls){ // 兼容终点站的原生 url schema 连接
+    obj.ExternalUrls = obj.ExternalUrls.filter(function(item) {
+      return !(item.Name.indexOf("Infuse") != -1 || item.Name.indexOf("nPlayer") != -1 || item.Name.indexOf("VLC") != -1 || item.Name.indexOf("IINA") != -1 || item.Name.indexOf("Movist Pro") != -1);
+    });
+  }
+
+  obj.ExternalUrls = [...nplayerPlay, ...infusePlay, ...vlcPlay, ...shuDownload, ...iinaPlay, ...movistproPlay, ...obj.ExternalUrls];
 
   $done({
     body: JSON.stringify(obj)
