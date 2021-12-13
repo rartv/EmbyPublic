@@ -32,8 +32,14 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
 
       let Name = '';
       item['MediaStreams'].forEach((t, i) => {
-        if(t['Type'] === 'Video' && item['Name']){
-          Name = ' - ' + item['Name'] + ' (' + t['DisplayTitle'] + ')'
+        if(t['Type'] === 'Video'){
+          if (item['Name'] && t['DisplayTitle']) {
+            Name = ' - ' + item['Name'] + ' (' + t['DisplayTitle'] + ')'
+          } else if (item['Name']) {
+            Name = ' - ' + item['Name']
+          } else if (t['DisplayTitle']) {
+            Name = ' - ' + t['DisplayTitle']
+          }
         }
 
         if(t['Type'] === 'Subtitle' && t['IsExternal'] && t['Path']){
