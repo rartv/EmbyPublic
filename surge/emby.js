@@ -14,7 +14,7 @@
 
 if ($request.url.indexOf('/Users/') != -1) {
   if($response.status==200){
-    $response.body = $response.body.replace(/"CanDownload":false,/g, '"CanDownload":true,');
+    $response.body = $response.body.replace(/"CanDownload":\s?false,/g, '"CanDownload": true,');
     let body = JSON.parse($response.body);
     let user_id_result = $request.url.match(/\/Users\/(\w{32})/);
     if (typeof(user_id_result) != "undefined") {
