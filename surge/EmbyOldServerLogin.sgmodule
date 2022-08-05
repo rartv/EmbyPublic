@@ -1,0 +1,8 @@
+#!name=Emby 旧版服务器登录 V1.0
+#!desc=解决 Emby 服务器版本过低，而 Emby 客户端版本过高导致客户端无法登录的问题。(强行登录可能存在其他兼容问题)
+
+[Script]
+Emby 旧版服务器登录 = type=http-response,pattern=(\/emby)\/system\/info\/public,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/EmbyOldServerLogin.js,debug=false
+
+[MITM]
+hostname = %APPEND% *.emby.wtf:0, *.plusmedia.site:0, *.jmsooo.com:0
