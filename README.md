@@ -1,2 +1,1 @@
-# EmbyPublic
-Emby 公益服
+# Emby 公益服
