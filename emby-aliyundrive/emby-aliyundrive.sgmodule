@@ -2,7 +2,7 @@
 #!desc=如果播放资源成功使用阿里云网盘加速，则发送通知提醒
 
 [Script]
-Emby 阿里云加速通知 = type=http-response,pattern=\/videos\/\d+\/stream.+MediaSourceId,requires-body=false,max-size=0,script-path=https://gitlab.com/ThinkPHP/surge/-/raw/main/emby-aliyundrive/emby-aliyundrive.js,debug=false
+Emby 阿里云加速通知 = type=http-response,pattern=\/videos\/\d+\/stream.+MediaSourceId,requires-body=false,max-size=0,script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/emby-aliyundrive/emby-aliyundrive.js,debug=false
 
 [MITM]
 hostname = %APPEND% *.bighippo.tv:29000
