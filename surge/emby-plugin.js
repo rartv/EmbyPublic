@@ -2,10 +2,9 @@
  * @description [emby调用第三方播放器播放 支持：Infuse、nPlayer、VLC 、IINA、Movist Pro]
  */
 
-let requestURL = $request.url;
-let addLink = '/Users';
+let requestURL = $request.url.toLowerCase();
 let embyPlguin = '/plugin/scheme/';
-if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
+if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
   let host = getHost(requestURL);
   let query = getQueryVariable(requestURL);
   let obj = JSON.parse($response.body);
@@ -19,13 +18,15 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
 
   if(obj.MediaSources){
     obj.MediaSources.forEach((item, index) => {
-      let fileName = item['Path'] ? item['Path'].substring(item['Path'].lastIndexOf('/') + 1) : obj.Name;
-      let videoUrl = host + '/Videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['X-Emby-Token'] + '&filename=' + encodeURIComponent(fileName);
+      let fileName = item['Path'] ? item['Path'].substring(item['Path'].lastIndexOf('/') + 1) : obj.FileName;
+      let suffix = fileName.substring(fileName.lastIndexOf("."));
+      let videoUrl = host + '/videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'] + '&filename=' + encodeURIComponent(fileName);
+      let shuVideoUrl = host + '/videos/'+ obj.Id +'/stream' + suffix + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'];
       let shuInfo = [{
         'header': {
           'User-Agent': 'Download',
         },
-        'url': videoUrl,
+        'url': shuVideoUrl,
         'name': fileName,
         'suspend': false,
       }];
@@ -48,7 +49,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
             'header': {
               'User-Agent': 'Download',
             },
-            'url': host + '/Videos/'+ obj.Id +'/' + item.Id + '/Subtitles/' + t['Index'] + '/Stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + query['X-Emby-Token'] + '&filename=' + encodeURIComponent(subtitleFileName),
+            'url': host + '/videos/'+ obj.Id +'/' + item.Id + '/subtitles/' + t['Index'] + '/stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + query['x-emby-token'] + '&filename=' + encodeURIComponent(subtitleFileName),
             'name': subtitleFileName,
             'suspend': false,
           });
@@ -103,6 +104,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     body: JSON.stringify(obj)
   });
 }else if(requestURL.indexOf(embyPlguin) != -1){  // 打开外部播放器
+  requestURL = requestURL.replace("mediasourceid", "MediaSourceId");
   let isSurge = typeof $httpClient != "undefined";
   let LocationURL = requestURL.split(embyPlguin)[1];
   let modifiedStatus = 'HTTP/1.1 302 Found';
@@ -114,7 +116,7 @@ if(requestURL.indexOf(addLink) != -1){  // 添加外部播放器链接
     headers: { Location: LocationURL }, 
     body: ""
   });
-}else if(requestURL.indexOf('/Videos/') != -1 && (requestURL.indexOf('/stream/') != -1 || requestURL.indexOf('/Subtitles/') != -1) ){  // 资源路径伪静态
+}else if(requestURL.indexOf('/videos/') != -1 && (requestURL.indexOf('/stream/') != -1 || requestURL.indexOf('/subtitles/') != -1) ){  // 资源路径伪静态
   let query = getQueryVariable(requestURL);
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
     $done({});
