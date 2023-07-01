@@ -12,7 +12,8 @@
 *
 */
 
-if ($request.url.indexOf('/Videos/') != -1 && $request.url.indexOf('&filename=') != -1) {
+let requestURL = $request.url.toLowerCase();
+if (requestURL.indexOf('/videos/') != -1 && requestURL.indexOf('&filename=') != -1) {
   if($response.status==200){
     let query = getQueryVariable($request.url);
     if (typeof(query.filename) == "undefined" || query.filename == "") {
