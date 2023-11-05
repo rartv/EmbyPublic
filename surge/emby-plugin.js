@@ -10,6 +10,8 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
   let obj = JSON.parse($response.body);
 
   let infusePlay = [];
+  let infusePlayLater = [];
+  let infuseDownload = [];
   let nplayerPlay = [];
   let vlcPlay = [];
   let iinaPlay = [];
@@ -21,6 +23,7 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
       let fileName = item['Path'] ? item['Path'].substring(item['Path'].lastIndexOf('/') + 1) : obj.FileName;
       let suffix = fileName.substring(fileName.lastIndexOf("."));
       let videoUrl = host + '/videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'] + '&filename=' + encodeURIComponent(fileName);
+      let externalSubtitles = [];
       let shuVideoUrl = host + '/videos/'+ obj.Id +'/stream' + suffix + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'];
       let shuInfo = [{
         'header': {
@@ -44,21 +47,45 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
         }
 
         if(t['Type'] === 'Subtitle' && t['IsExternal'] && t['Path']){
-        let subtitleFileName = t['Path'].substring(t['Path'].lastIndexOf('/') + 1)
+          let subtitleFileName = t['Path'].substring(t['Path'].lastIndexOf('/') + 1)
+          let subtitleUrl = host + '/videos/'+ obj.Id +'/' + item.Id + '/subtitles/' + t['Index'] + '/stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + query['x-emby-token'] + '&filename=' + encodeURIComponent(subtitleFileName);
+          externalSubtitles.push(subtitleUrl);
           shuInfo.push({
             'header': {
               'User-Agent': 'Download',
             },
-            'url': host + '/videos/'+ obj.Id +'/' + item.Id + '/subtitles/' + t['Index'] + '/stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + query['x-emby-token'] + '&filename=' + encodeURIComponent(subtitleFileName),
+            'url': subtitleUrl,
             'name': subtitleFileName,
             'suspend': false,
           });
         }
       });
 
-      infusePlay.push({
-        Url: host + embyPlguin + 'infuse://x-callback-url/play?url='+ encodeURIComponent(videoUrl),
-        Name: 'Infuse'+ Name
+      // Infuse 播放
+      if (externalSubtitles.length == 0) {
+        // 无外挂字幕播放
+        infusePlay.push({
+          Url: host + embyPlguin + 'infuse://x-callback-url/play?url='+ encodeURIComponent(videoUrl),
+          Name: 'Infuse播放'+ Name
+        });
+      } else {
+        // 有外挂字幕播放（Infuse 7.6.2 及以上版本）
+        infusePlay.push({
+          Url: host + embyPlguin + 'infuse://x-callback-url/play?url='+ encodeURIComponent(videoUrl) + '&sub=' + encodeURIComponent(externalSubtitles[0]),
+          Name: 'Infuse播放'+ Name
+        });
+      }
+
+      // Infuse 下载（Infuse 7.6.2 及以上版本）
+      infuseDownload.push({
+        Url: host + embyPlguin + 'infuse://x-callback-url/save?url='+ encodeURIComponent(videoUrl) + '&download=1',
+        Name: 'Infuse下载'+ Name
+      });
+
+      // 无外挂字幕稍后播放（Infuse 7.6.2 及以上版本）
+      infusePlayLater.push({
+        Url: host + embyPlguin + 'infuse://x-callback-url/save?url='+ encodeURIComponent(videoUrl),
+        Name: 'Infuse稍后播放'+ Name
       });
 
       nplayerPlay.push({
@@ -98,7 +125,7 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
     });
   }
 
-  obj.ExternalUrls = [...nplayerPlay, ...infusePlay, ...vlcPlay, ...shuDownload, ...iinaPlay, ...movistproPlay, ...obj.ExternalUrls];
+  obj.ExternalUrls = [...infusePlay, ...infuseDownload, ...infusePlayLater, ...shuDownload, ...nplayerPlay, ...vlcPlay, ...iinaPlay, ...movistproPlay, ...obj.ExternalUrls];
 
   $done({
     body: JSON.stringify(obj)

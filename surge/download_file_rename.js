@@ -10,8 +10,8 @@
 *
 * @Copyright: 2021 https://t.me/EmbyPublic All rights reserved.
 *
-*/
 
+*/
 let requestURL = $request.url.toLowerCase();
 if (requestURL.indexOf('/videos/') != -1 && requestURL.indexOf('&filename=') != -1) {
   if($response.status==200){
