@@ -3,11 +3,15 @@
  */
 
 let requestURL = $request.url.toLowerCase();
+let headers = $request.headers;
 let embyPlguin = '/plugin/scheme/';
 if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
   let host = getHost(requestURL);
   let query = getQueryVariable(requestURL);
   let obj = JSON.parse($response.body);
+
+  // 获取 Emby Token
+  let embyToken = typeof(headers['X-Emby-Token']) != "undefined" ? headers['X-Emby-Token'] : query['x-emby-token'];
 
   let infusePlay = [];
   let infusePlayLater = [];
@@ -22,9 +26,9 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
     obj.MediaSources.forEach((item, index) => {
       let fileName = item['Path'] ? item['Path'].substring(item['Path'].lastIndexOf('/') + 1) : obj.FileName;
       let suffix = fileName.substring(fileName.lastIndexOf("."));
-      let videoUrl = host + '/videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'] + '&filename=' + encodeURIComponent(fileName);
+      let videoUrl = host + '/videos/'+ obj.Id +'/stream/' + encodeURIComponent(fileName) + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ embyToken + '&filename=' + encodeURIComponent(fileName);
       let externalSubtitles = [];
-      let shuVideoUrl = host + '/videos/'+ obj.Id +'/stream' + suffix + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ query['x-emby-token'];
+      let shuVideoUrl = host + '/videos/'+ obj.Id +'/stream' + suffix + '?MediaSourceId='+ item.Id +'&Static=true&api_key='+ embyToken;
       let shuInfo = [{
         'header': {
           'User-Agent': 'Download',
@@ -48,7 +52,7 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
 
         if(t['Type'] === 'Subtitle' && t['IsExternal'] && t['Path']){
           let subtitleFileName = t['Path'].substring(t['Path'].lastIndexOf('/') + 1)
-          let subtitleUrl = host + '/videos/'+ obj.Id +'/' + item.Id + '/subtitles/' + t['Index'] + '/stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + query['x-emby-token'] + '&filename=' + encodeURIComponent(subtitleFileName);
+          let subtitleUrl = host + '/videos/'+ obj.Id +'/' + item.Id + '/subtitles/' + t['Index'] + '/stream.' + t['Codec'] + '/' + encodeURIComponent(subtitleFileName) + '?api_key=' + embyToken + '&filename=' + encodeURIComponent(subtitleFileName);
           externalSubtitles.push(subtitleUrl);
           shuInfo.push({
             'header': {
@@ -114,7 +118,7 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
 
       shuDownload.push({
         Url: host + embyPlguin + 'shu://gui.download.http?urls='+ encodeURIComponent(JSON.stringify(shuInfo)),
-        Name: 'Shu'+ Name
+        Name: 'Shu下载'+ Name
       });
     });
   }
@@ -123,10 +127,11 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
     obj.ExternalUrls = obj.ExternalUrls.filter(function(item) {
       return !(item.Name.indexOf("Infuse") != -1 || item.Name.indexOf("nPlayer") != -1 || item.Name.indexOf("VLC") != -1 || item.Name.indexOf("IINA") != -1 || item.Name.indexOf("Movist Pro") != -1);
     });
+  } else {
+    obj.ExternalUrls = [];
   }
 
-  obj.ExternalUrls = [...infusePlay, ...infuseDownload, ...infusePlayLater, ...shuDownload, ...nplayerPlay, ...vlcPlay, ...iinaPlay, ...movistproPlay, ...obj.ExternalUrls];
-
+  obj.ExternalUrls = [...infusePlay, ...infusePlayLater, ...infuseDownload, ...shuDownload, ...nplayerPlay, ...vlcPlay, ...iinaPlay, ...movistproPlay, ...obj.ExternalUrls];
   $done({
     body: JSON.stringify(obj)
   });
@@ -153,13 +158,13 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
     requestURL = $request.url.replace('/' + query['filename'], '');
     $done({
       url: requestURL,
-      headers: $request.headers
+      headers: headers
     });
   } else {
     requestURL = $request.path.replace('/' + query['filename'], '');
     $done({
       path: requestURL,
-      headers: $request.headers
+      headers: headers
     });
   }
 }else {
