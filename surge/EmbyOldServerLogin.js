@@ -14,7 +14,7 @@
 
 if ($request.url.indexOf('/system/info/public') != -1) {
   if($response.status==200){
-    $response.body = $response.body.replace(/"Version":"\d+\.\d+\.\d+\.\d+"/g, '"Version":"4.7.6.0"');
+    $response.body = $response.body.replace(/"Version":"\d+\.\d+\.\d+\.\d+"/g, '"Version":"4.7.14.0"');
     console.log($response.body + "\n");
     $done({status: $response.status, headers: $response.headers, body: $response.body });
 }else{
