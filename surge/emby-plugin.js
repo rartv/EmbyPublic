@@ -153,6 +153,7 @@ if(requestURL.indexOf('/users') != -1){  // 添加外部播放器链接
   if (typeof(query['filename']) == "undefined" || query['filename'] == "") {
     $done({});
   }
+  headers['User-Agent'] = "Emby/2 CFNetwork/1410.0.3 Darwin/22.6.0";
   let isSurge = typeof $httpClient != "undefined";
     if(isSurge){
     requestURL = $request.url.replace('/' + query['filename'], '');
